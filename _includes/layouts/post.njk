@@ -1,5 +1,6 @@
 ---
 layout: layouts/base.njk
+permalink: "{{ page.inputPath | getBasenameWithoutExtension }}.html"
 ---
 
 <link rel="stylesheet" href="/css/post.css">
@@ -43,6 +44,7 @@ layout: layouts/base.njk
   {%- set previousPost = collections.posts | getPreviousCollectionItem %}
   {%- set nextPost = collections.posts | getNextCollectionItem %}
   {%- if nextPost or previousPost %}
+
     <ul class="links-nextprev">
       {%- if previousPost %}
         <li>Previous:
@@ -55,5 +57,6 @@ layout: layouts/base.njk
         </li>
       {% endif %}
     </ul>
+
   {%- endif %}
 {%- endif %}

@@ -92,7 +92,7 @@ a[href]:active {
 }
 
 main {
-  padding: 1rem;
+  padding: 0.5rem 1rem;
 }
 main :first-child {
   margin-top: 0;
@@ -100,8 +100,8 @@ main :first-child {
 
 .links-nextprev {
   list-style: none;
-  /* border-top: 1px dashed var(--color-gray-20); */
   padding: 1em 3.5rem;
+  /* border-top: 1px dashed var(--color-gray-20); */
 }
 
 table {

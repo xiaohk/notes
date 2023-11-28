@@ -45,6 +45,13 @@ module.exports = function (eleventyConfig) {
     return path.split('/').slice(-1)[0];
   });
 
+  eleventyConfig.addFilter('getBasenameWithoutExtension', path => {
+    return path
+      .split('/')
+      .slice(-1)[0]
+      .replace(/(.*?)\..*/, '$1');
+  });
+
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(
