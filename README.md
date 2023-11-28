@@ -2,7 +2,9 @@
 
 [![Github Actions Status](https://github.com/xiaohk/notes/workflows/build/badge.svg)](https://github.com/xiaohk/notes/actions/workflows/build.yml)
 
-A collection of my notes. [Comments](https://github.com/xiaohk/notes/issues) and [edits](https://github.com/xiaohk/notes/pulls) are welcome!
+A collection of my notes. The source markdown files are at [./content/note](https://github.com/xiaohk/notes/tree/main/content/note).
+
+[Comments](https://github.com/xiaohk/notes/issues) and [edits](https://github.com/xiaohk/notes/pulls) are welcome!
 
 ## Built with
 
