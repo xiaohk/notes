@@ -1,3 +1,28 @@
 p {
-	background-color: blue;
+  background-color: white;
+}
+
+.markdown-body {
+  max-width: 1012px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+.content {
+  padding: 2.5rem;
+  box-sizing: border-box;
+
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+}
+
+.content > *:first-child {
+  margin-top: 0 !important;
+}
+
+.top-bar li + li {
+  margin-top: unset;
 }

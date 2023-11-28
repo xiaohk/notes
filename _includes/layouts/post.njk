@@ -2,30 +2,36 @@
 layout: layouts/base.njk
 ---
 
-<link
-  rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
 
 {# Only include the syntax highlighter CSS on blog posts #}
-{%- css %}{% include "node_modules/prismjs/themes/prism-okaidia.css" %}{% endcss %}
 {%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
 
-<h1>{{ title }}</h1>
+<div class="markdown-body">
 
-<ul class="post-metadata">
-  <li>
-    <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
-  </li>
-  {%- for tag in tags | filterTagList %}
-    {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
-    <li>
-      <a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>
-      {%- if not loop.last %},
+  <div class="top-bar">
+
+    <ul class="post-metadata">
+      <div class="filename">{{ title }}</div>
+      <li>
+        <time datetime="{{ page.date | htmlDateString }}">{{ page.date | readableDate }}</time>
+      </li>
+      {%- for tag in tags | filterTagList %}
+        {%- set tagUrl %}/tags/{{ tag | slugify }}/{% endset %}
+        <li>
+          <a href="{{ tagUrl }}" class="post-tag">{{ tag }}</a>
+          {%- if not loop.last %},
         {% endif %}
-    </li>
-  {%- endfor %}
-</ul>
+        </li>
+      {%- endfor %}
+    </ul>
+  </div>
 
-{{ content | safe }}
+  <div class="content">
+    {{ content | safe }}
+  </div>
+</div>
 
 {%- if collections.posts %}
   {%- set previousPost = collections.posts | getPreviousCollectionItem %}
