@@ -41,6 +41,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(pluginBundle);
 
   // Filters
+  eleventyConfig.addFilter('getBasename', path => {
+    return path.split('/').slice(-1)[0];
+  });
+
   eleventyConfig.addFilter('readableDate', (dateObj, format, zone) => {
     // Formatting tokens for Luxon: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
     return DateTime.fromJSDate(dateObj, { zone: zone || 'utc' }).toFormat(

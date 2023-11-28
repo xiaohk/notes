@@ -1,9 +1,11 @@
 ---
-title: Paper Mark Up
+title: How to Mark Up Paper Revisions with LaTeX
 description: Tips on preparing paper revision with latex
 date: 2023-11-27
 tags:
   - latex
+  - writing
+  - research
 ---
 {% raw %}
 

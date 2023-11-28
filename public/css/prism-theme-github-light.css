@@ -116,6 +116,9 @@ pre[class*='language-'] > code[class*='language-'] {
 .token.function {
   color: #8250df;
 }
+.token.function.selector {
+  color: #0550ae;
+}
 .token.regex,
 .token.important,
 .token.variable {
