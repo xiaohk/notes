@@ -43,6 +43,12 @@ body {
   max-width: 1012px;
 }
 
+@media (max-width: 641px) {
+  body {
+    font-size: 14px;
+  }
+}
+
 /* https://www.a11yproject.com/posts/how-to-hide-content/ */
 .visually-hidden {
   clip: rect(0 0 0 0);
@@ -87,6 +93,12 @@ main :first-child {
   list-style: none;
   padding: 1em 3.5rem;
   /* border-top: 1px dashed var(--color-gray-20); */
+}
+
+@media (max-width: 641px) {
+  .links-nextprev {
+    padding: 0.5rem 1.5rem;
+  }
 }
 
 table {
@@ -142,6 +154,12 @@ header .header-content {
   align-items: center;
 
   box-sizing: border-box;
+}
+
+@media (max-width: 641px) {
+  header .header-content {
+    padding: 0.5rem 2.5rem;
+  }
 }
 
 header:after {

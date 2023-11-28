@@ -13,6 +13,12 @@
   word-wrap: break-word;
 }
 
+@media (max-width: 641px) {
+  .markdown-body {
+    font-size: 14px;
+  }
+}
+
 .markdown-body .octicon {
   display: inline-block;
   fill: currentColor;
