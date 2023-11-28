@@ -44,20 +44,13 @@ p {
       margin-right: 12px;
     }
 
-    .tag-wrapper a {
-      /* color: var(--gray-700); */
-      &:visited {
-        /* color: unset; */
-      }
-    }
-
     .post-tag {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       text-transform: unset;
       font-style: unset;
-      background-color: hsla(0, 0%, 0%, 0.08);
+      background-color: hsla(0, 0%, 0%, 0.06);
       padding: 2px 5px;
       font-size: 85%;
       border-radius: 6px;
