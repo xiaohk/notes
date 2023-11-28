@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Submit Papers to arXiv?</title>
+    <meta
+    name="description" content="Tips on preparing arXiv submissions">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+    
+    
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes" class="filename">arxiv-preparation.md</a>
+
+      <div>
+        <time datetime="2020-04-30">30 April 2020</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 id="how-to-submit-papers-to-arxiv" tabindex="-1">How to Submit Papers to arXiv? <a class="header-anchor" href="#how-to-submit-papers-to-arxiv">#</a></h1>
+<h2 id="submission-steps" tabindex="-1">Submission Steps <a class="header-anchor" href="#submission-steps">#</a></h2>
+<ol>
+<li>
+<p>Download source code from Overleaf if you use it: <code>menu</code> -&gt; <code>download</code> -&gt; <code>source</code>.</p>
+</li>
+<li>
+<p>Strip comments and combine all <code>tex</code> files (<code>f01-main.tex</code>, <code>f02-intro.tex</code>, etc.) into one file <code>arxiv_main.tex</code>.</p>
+</li>
+</ol>
+<pre class="language-[bash]" tabindex="0"><code class="language-[bash]"># Replace f01-main.tex with the main tex file in your overleaf project
+latexpand --empty-comments f01-main.tex > arxiv_main.tex</code></pre>
+<ol start="3">
+<li>
+<p>Create a new directory and copy only essential files into it (<code>arxiv_main.tex</code>, style files, figures, etc.).</p>
+</li>
+<li>
+<p>Compile <code>arxiv_main.tex</code> with BibTeX in your new directory by running the following four commands. The main purpose of this step is to generate a <code>.bbl</code> file. You would need to run <code>pdflatex</code> three times. Check if the generated <code>arxiv_main.pdf</code> looks correct.</p>
+</li>
+</ol>
+<pre class="language-[bash]" tabindex="0"><code class="language-[bash]">pdflatex arxiv_main
+bibtex arxiv_main
+pdflatex arxiv_main
+pdflatex arxiv_main</code></pre>
+<ol start="5">
+<li>Zip all files inside the directory (don't include the directory itself). Upload the tarball file <code>arxiv.tar.gz</code> to arXiv.</li>
+</ol>
+<pre class="language-[bash]" tabindex="0"><code class="language-[bash]">tar czvf arxiv.tar.gz ./*</code></pre>
+<h2 id="when-to-post-on-arxiv" tabindex="-1">When to Post on arXiv? <a class="header-anchor" href="#when-to-post-on-arxiv">#</a></h2>
+<ol>
+<li>The &quot;deadlines&quot; of arXiv submission</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Submissions received between (all times Eastern US)</th>
+<th>Will be announced (all times Eastern US)</th>
+<th>Mailed to subscribers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Monday 14:00 – Tuesday 14:00</td>
+<td>Tuesday 20:00</td>
+<td>Tuesday night / Wednesday morning</td>
+</tr>
+<tr>
+<td>Tuesday 14:00 – Wednesday 14:00</td>
+<td>Wednesday 20:00</td>
+<td>Wednesday night / Thursday morning</td>
+</tr>
+<tr>
+<td>Wednesday 14:00 – Thursday 14:00</td>
+<td>Thursday 20:00</td>
+<td>Thursday night / Friday morning</td>
+</tr>
+<tr>
+<td>Thursday 14:00 – Friday 14:00</td>
+<td>Sunday 20:00</td>
+<td>Sunday night / Monday morning</td>
+</tr>
+<tr>
+<td>Friday 14:00 – Monday 14:00</td>
+<td>Monday 20:00</td>
+<td>Monday night / Tuesday morning</td>
+</tr>
+</tbody>
+</table>
+<ol start="2">
+<li>If you post between <strong>Wednesday 14:00 – Thursday 14:00</strong>, it will be announced on Thursday 20:00 and be on the arXiv front-page for <strong>three days</strong>. This is because the next announcement will be on Sunday 20:00. This is the best day to post on arXiv if you want to maximize the exposure.</li>
+<li>By default, arXiv orders submissions by &quot;recentness&quot;. Therefore, if you submit <strong>right before 14:00</strong>, it is more likely to be listed on the first page of the list (top 25 most recent submissions). On Thursday, there are usually about 70-100 machine learning submissions (3-4 pages!)</li>
+</ol>
+<h2 id="troubleshooting" tabindex="-1">Troubleshooting <a class="header-anchor" href="#troubleshooting">#</a></h2>
+<ol>
+<li>⚠️ <code>latexpand --empty-comments</code> does not remove comments in <code>\begin{comment}\end{comment}</code>. If you write comments other than the native way <code>%</code>, you can use <a href="https://github.com/google-research/arxiv-latex-cleaner">arxiv-latex-cleaner</a> to clean comments.</li>
+<li>Check out the <a href="https://www.overleaf.com/learn/how-to/LaTeX_checklist_for_arXiv_submissions">checklist for arXiv submission from Overleaf</a> (Thanks <a href="https://github.com/bhoov">@bhoov</a>)</li>
+<li>Remember to keep your primary <code>.tex</code> file in the root level of the repository</li>
+<li><code>natbib</code> in an unsorted number style does not work on ArXiv. Solution: remove <code>natbib</code> as a dependency, use <code>\bibliographystyle{unsrt}</code> instead of <code>\bibliographystyle{unsrtnat}</code></li>
+</ol>
+<h2 id="best-practices" tabindex="-1">Best Practices <a class="header-anchor" href="#best-practices">#</a></h2>
+<p>Now arXiv can successfully compile your LeTeX file! 🎉 Here are some tips to make the generated PDF look great.</p>
+<ol>
+<li><strong>Double check the generated PDF.</strong> It's likely that arXiv is using a different LaTeX version from yours, resulting in a different-looking PDF.
+<ol>
+<li>If you use PDFLaTeX to compile LaTeX files locally, <a href="https://info.arxiv.org/help/submit_tex.html#pdflatex">you can set <code>\pdfoutput=1</code></a> in the start of your <code>arxiv_main.tex</code> to force arXiv to also use PDFLaTeX.</li>
+<li>Sometimes arXiv would mess up with the microtype for full justification papers, especially in section headers and figure captions (e.g., adding a new line). Double check the generated PDF and modify the text when needed. One way to avoid new lines is to wrap your text in <code>\mbox{}</code> and force LaTeX to overflow that line.</li>
+</ol>
+</li>
+<li><strong>Add page numbers.</strong> Typically conference style files hide page numbers, so that all accepted papers can bundled into a conference proceeding with a proceeding page number. However, preprints with page numbers are easier to read. Here is a <a href="https://notes.zijie.wang/add-paper-page-num.html">simple guide</a> to add page number for different popular CS conference LaTeX templates.</li>
+<li><strong>Use the correct copyright block</strong> (especially for ACM conferences). Make sure your preprint PDF claims the correct copyright license (e.g., CC, IW3C2W3, rightsretained). For ACM conferences, you can change the copyright block with the command <code>setcopyright{}</code>. However, if your paper has a Creative Common (CC) license, you would need <a href="https://notes.zijie.wang/add-acm-cc-block.html">some hacks</a> to make it work.</li>
+</ol>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Next:
+            <a href="/add-acm-cc-block.html">How to Add CC Block for ACM Preprints?</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /arxiv-preparation.html -->
+  </body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Add CC Block for ACM Preprints?</title>
+    <meta
+    name="description" content="Tips on adding a CC block to your ACM preprints">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+    
+    
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes" class="filename">add-acm-cc-block.md</a>
+
+      <div>
+        <time datetime="2023-01-26">26 January 2023</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h2 id="create-a-cc-block-for-acm-preprints" tabindex="-1">Create a CC Block for ACM Preprints <a class="header-anchor" href="#create-a-cc-block-for-acm-preprints">#</a></h2>
+<p>Here are two methods to create a nice CC copyright block for your ACM preprint.</p>
+<p><img src="https://i.imgur.com/372xtUH.png" alt=""></p>
+<p>First, you need to check your <code>acmart.cls</code> version (you can find it from the first 50 lines of this file).</p>
+<h2 id="version-v1-87" tabindex="-1">version &gt;= v1.87 <a class="header-anchor" href="#version-v1-87">#</a></h2>
+<p>The newer acmart style comes with CC support! However, it only works if you are using <code>noacm</code> option. You can bypass the constraint by modifying the <code>acmart.cls</code> file.</p>
+<p>Comment out the following code in <code>acmart.cls</code> (line 1937 in v1.87):</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% \ClassError{\@classname}{%</span>
+<span class="token comment">%   Sorry, Creative Commons licenses are\MessageBreak</span>
+<span class="token comment">%   currently not used with ACM publications\MessageBreak</span>
+<span class="token comment">%   typeset by the authors}{Please use nonacm</span>
+<span class="token comment">%      option or ACM Engage class to enable CC licenses}%</span></code></pre>
+<p>Then, you can use the <code>cc</code> copyright by adding the following code in your source <code>.tex</code> file:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\setcopyright</span><span class="token punctuation">{</span>cc<span class="token punctuation">}</span>
+<span class="token function selector">\setcctype</span><span class="token punctuation">[</span>4.0<span class="token punctuation">]</span><span class="token punctuation">{</span>by<span class="token punctuation">}</span></code></pre>
+<h2 id="version-v1-87-1" tabindex="-1">version &lt; v1.87 <a class="header-anchor" href="#version-v1-87-1">#</a></h2>
+<p>We can use <code>etoolbox</code> to override the special command <code>@copyrightpermission</code> defined in <code>acmart.cls</code>.</p>
+<ol>
+<li>Download <code>cc-by4.pdf</code> from <a href="https://en.wikipedia.org/wiki/Creative_Commons_license#/media/File:CC_BY_icon.svg">here</a></li>
+<li>Add the following code in your <code>.tex</code> source file (make sure it is before <code>\maketitle</code> comamnd)</li>
+</ol>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\setcopyright</span><span class="token punctuation">{</span>rightsretained<span class="token punctuation">}</span>
+<span class="token comment">% .... Other conference info ...</span>
+
+<span class="token comment">% Add CC figure</span>
+
+<span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">etoolbox</span><span class="token punctuation">}</span>
+<span class="token function selector">\makeatletter</span>
+<span class="token function selector">\tracingpatches</span>
+<span class="token function selector">\patchcmd</span><span class="token punctuation">{</span><span class="token function selector">\maketitle</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\@</span>copyrightpermission<span class="token punctuation">}</span><span class="token punctuation">{</span>
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">minipage</span><span class="token punctuation">}</span><span class="token punctuation">{</span>0.3<span class="token function selector">\columnwidth</span><span class="token punctuation">}</span>
+     <span class="token function selector">\href</span><span class="token punctuation">{</span>&lt;https://creativecommons.org/licenses/by/4.0/><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>width=0.90<span class="token function selector">\textwidth</span><span class="token punctuation">]</span><span class="token punctuation">{</span>figures/cc-by4.pdf<span class="token punctuation">}</span><span class="token punctuation">}</span>
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">minipage</span><span class="token punctuation">}</span><span class="token function selector">\hfill</span>
+   <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">minipage</span><span class="token punctuation">}</span><span class="token punctuation">{</span>0.7<span class="token function selector">\columnwidth</span><span class="token punctuation">}</span>
+     <span class="token function selector">\href</span><span class="token punctuation">{</span>&lt;https://creativecommons.org/licenses/by/4.0/><span class="token punctuation">}</span><span class="token punctuation">{</span>This work is licensed under a Creative Commons Attribution International 4.0 License.<span class="token punctuation">}</span>
+   <span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">minipage</span><span class="token punctuation">}</span>
+
+   <span class="token function selector">\vspace</span><span class="token punctuation">{</span>5pt<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\makeatletter</span></code></pre>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Previous:
+            <a href="/arxiv-preparation.html">How to Submit Papers to arXiv?</a>
+        </li>
+      
+        <li>Next:
+            <a href="/how-to-make-taps-happy.html">How To Make ACM TAPS Happy?</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /add-acm-cc-block.html -->
+  </body>
+</html>

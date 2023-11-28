@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Methods to Add Page Numbers in Your CS Papers</title>
+    <meta
+    name="description" content="Tips on adding page numbers in your CS papers">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+    
+    
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes" class="filename">add-paper-page-num.md</a>
+
+      <div>
+        <time datetime="2023-02-15">15 February 2023</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 id="simple-methods-to-add-page-numbers-in-your-cs-papers" tabindex="-1">Simple Methods to Add Page Numbers in Your CS Papers <a class="header-anchor" href="#simple-methods-to-add-page-numbers-in-your-cs-papers">#</a></h1>
+<table>
+<tr>
+  <td> Conference </td> <td> Method </td>
+</tr>
+<tr>
+<td>
+<p><a href="https://www.aclweb.org/portal/">ACM conferences</a> (e.g., CHI, KDD, WebConf, CIKM that use the <a href="https://github.com/borisveytsman/acmart"><code>acmart</code> LaTeX style</a>)</p>
+</td>
+<td>
+<p>Use <code>\settopmatter{printfolios=true}</code> right after <code>\documentclass</code>.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\documentclass</span><span class="token punctuation">[</span>sigconf, screen<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">acmart</span><span class="token punctuation">}</span>
+<span class="token function selector">\settopmatter</span><span class="token punctuation">{</span>printfolios=true<span class="token punctuation">}</span></code></pre>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="https://www.aclweb.org/portal/">ACL conferences</a> (e.g., ACL, NAACL, EACL, EMNLP)</p>
+</td>
+<td>
+<p>Comment out <code>\pagestyle{empty}</code> in the conference style file (e.g., <code>acl2023.sty</code>)</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\ifacl</span>@finalcopy
+    <span class="token comment">% \thispagestyle{empty}</span>
+    <span class="token comment">% \pagestyle{empty}</span>
+    <span class="token function selector">\pagenumbering</span><span class="token punctuation">{</span>arabic<span class="token punctuation">}</span>
+<span class="token function selector">\else</span>
+    <span class="token function selector">\pagenumbering</span><span class="token punctuation">{</span>arabic<span class="token punctuation">}</span>
+<span class="token function selector">\fi</span></code></pre>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="https://www.aclweb.org/portal/">IEEE VIS</a> (or <a href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=2945">TVCG</a> and some other IEEE conferences)</p>
+</td>
+<td>
+<p>Use the <code>preprint</code> option for the <code>vgtc</code> LaTeX style file.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\documentclass</span><span class="token punctuation">[</span>preprint<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">vgtc</span><span class="token punctuation">}</span></code></pre>
+</td>
+</tr>
+<tr>
+<td>
+<p><a href="https://www.aclweb.org/portal/">NeurIPS</a></p>
+</td>
+<td>
+<p>Use the <code>preprint</code> or the <code>final</code> option for the <code>neurips</code> LaTeX style file.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\usepackage</span><span class="token punctuation">[</span>preprint<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">neurips_2022</span><span class="token punctuation">}</span>
+<span class="token function selector">\usepackage</span><span class="token punctuation">[</span>final<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token keyword">neurips_2022</span><span class="token punctuation">}</span></code></pre>
+</td>
+</tr>
+</table>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Previous:
+            <a href="/how-to-make-taps-happy.html">How To Make ACM TAPS Happy?</a>
+        </li>
+      
+        <li>Next:
+            <a href="/paper-revision-markup.html">How to Mark Up Paper Revisions with LaTeX</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /add-paper-page-num.html -->
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Mark Up Paper Revisions with LaTeX</title>
+    <meta
+    name="description" content="Tips on preparing paper revision with latex">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+    
+    
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes" class="filename">paper-revision-markup.md</a>
+
+      <div>
+        <time datetime="2023-11-27">27 November 2023</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 id="how-to-mark-up-paper-revisions-with-latex" tabindex="-1">How to Mark Up Paper Revisions with LaTeX <a class="header-anchor" href="#how-to-mark-up-paper-revisions-with-latex">#</a></h1>
+<p>Below are three steps to highlight changes made in a paper revision with LaTeX.</p>
+<h2 id="step-1-generate-a-submission-snapshot" tabindex="-1">Step 1. Generate a submission snapshot <a class="header-anchor" href="#step-1-generate-a-submission-snapshot">#</a></h2>
+<p>We first take a snapshot of the last version of the LaTeX project before the paper's original submission. If you use Git to version control your project, it is easy to checkout the exact version used for the original submission.</p>
+<ol>
+<li>Use <code>latexpand</code> to flatten the LaTeX structure. It combines all LaTeX files into one file.</li>
+</ol>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># After submission, before revision</span>
+latexpand --empty-comments f01-main.tex <span class="token operator">></span> submission.tex</code></pre>
+<ol start="2">
+<li>If you are updating any figure, give it a new name (e.g., <code>figures/{figure-name}-old.pdf</code>) and update its reference in <code>submission.tex</code>. We need to have both the old figure and new figure to show the differences in Step 3.</li>
+</ol>
+<h2 id="step-2-generate-a-revision-snapshot" tabindex="-1">Step 2. Generate a revision snapshot <a class="header-anchor" href="#step-2-generate-a-revision-snapshot">#</a></h2>
+<p>Once you have made all the revisions, you can take a snapshot of the latest version similar to Step 1.</p>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># After revision</span>
+latexpand --empty-comments f01-main.tex <span class="token operator">></span> revision.tex</code></pre>
+<h2 id="step-3-highlight-the-changes" tabindex="-1">Step 3. Highlight the changes <a class="header-anchor" href="#step-3-highlight-the-changes">#</a></h2>
+<p>We use <code>latexdiff</code> to highlight the changes made during the revision.</p>
+<ol>
+<li>
+<p>Copy your <code>submission.tex</code> and all old figures (e.g., <code>figures/{figure-name}-old.pdf</code>) to your current project directory.</p>
+</li>
+<li>
+<p>Create three configuration files for <code>latexdiff</code>.</p>
+</li>
+</ol>
+<p>You can copy my configuration into three files <code>diff-preamble.tex</code>, <code>diff-config.cfg</code>, and <code>diff-safecomp.cfg</code>. You can learn more about the configurations on <a href="https://mirrors.mit.edu/CTAN/support/latexdiff/doc/latexdiff-man.pdf">latexidff's documentation</a>.</p>
+<p><strong>File 1:</strong> <code>diff-preamble.tex</code></p>
+<p>This file defines how to style the additions and deletions.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% [diff-preamble.tex]</span>
+
+<span class="token function selector">\RequirePackage</span><span class="token punctuation">[</span>normalem<span class="token punctuation">]</span><span class="token punctuation">{</span>ulem<span class="token punctuation">}</span>
+<span class="token function selector">\RequirePackage</span><span class="token punctuation">{</span>color<span class="token punctuation">}</span><span class="token function selector">\definecolor</span><span class="token punctuation">{</span>RED<span class="token punctuation">}</span><span class="token punctuation">{</span>rgb<span class="token punctuation">}</span><span class="token punctuation">{</span>1,0,0<span class="token punctuation">}</span><span class="token function selector">\definecolor</span><span class="token punctuation">{</span>BLUE<span class="token punctuation">}</span><span class="token punctuation">{</span>rgb<span class="token punctuation">}</span><span class="token punctuation">{</span>0,0,1<span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFadd</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token function selector">\protect</span><span class="token function selector">\color</span><span class="token punctuation">{</span>BLUE<span class="token punctuation">}</span>#1<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdel</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token punctuation">{</span><span class="token function selector">\protect</span><span class="token function selector">\color</span><span class="token punctuation">{</span>RED<span class="token punctuation">}</span><span class="token function selector">\sout</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFaddbegin</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFaddend</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdelbegin</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdelend</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFaddFL</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\DIFadd</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdelFL</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\DIFdel</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token comment">% I don't like the default undercurl for added text, so I commented it out below</span>
+<span class="token comment">% \providecommand{\DIFdelFL}[1]{}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFaddbeginFL</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFaddendFL</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdelbeginFL</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\providecommand</span><span class="token punctuation">{</span><span class="token function selector">\DIFdelendFL</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span></code></pre>
+<p><strong>File 2:</strong> <code>diff-config.cfg</code></p>
+<p>This file tells <code>latexdiff</code> to show the deleted image in the original scale.</p>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token assign-left variable">SCALEDELGRAPHICS</span><span class="token operator">=</span><span class="token number">1</span></code></pre>
+<p><strong>File 3:</strong> <code>diff-config.cfg</code></p>
+<p>This file tells <code>latexdiff</code> what are the &quot;safe commands&quot; that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, <code>myquote</code> is a macro of <code>\newcommand*\myquote[1]{``\textit{#1}''}</code>.</p>
+<pre class="language-text" tabindex="0"><code class="language-text">myquote
+multirow</code></pre>
+<ol start="3">
+<li>Generate <code>diff.tex</code> using <code>latexdiff</code>.</li>
+</ol>
+<pre class="language-bash" tabindex="0"><code class="language-bash">latexdiff submission.tex revision.tex <span class="token operator">></span> diff.tex --graphics-markup<span class="token operator">=</span><span class="token number">2</span> <span class="token parameter variable">-p</span> diff-preamble.tex --append-safecmd<span class="token operator">=</span>diff-safecmd.cfg <span class="token parameter variable">--config</span><span class="token operator">=</span>diff-config.cfg</code></pre>
+<ol start="4">
+<li>Generate <code>diff.pdf</code> from <code>diff.tex</code>.</li>
+</ol>
+<pre class="language-bash" tabindex="0"><code class="language-bash">pdflatex <span class="token function">diff</span>
+bibtex <span class="token function">diff</span>
+pdflatex <span class="token function">diff</span>
+pdflatex <span class="token function">diff</span></code></pre>
+<p>🎉 Open <code>diff.pdf</code>, you should see all revision changes to text and figures being highlighted.</p>
+<ol start="5">
+<li>[Recommended] Finally, to speed up the generation process, you can combine all commands into a bash script and run it instead: <code>zsh diff-generate.sh</code>.</li>
+</ol>
+<pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token comment"># [diff-generate.sh]</span>
+
+latexpand --empty-comments f01-main.tex <span class="token operator">></span> revision.tex
+
+latexdiff submission.tex revision.tex <span class="token operator">></span> diff.tex --graphics-markup<span class="token operator">=</span><span class="token number">2</span> <span class="token parameter variable">-p</span> diff-preamble.tex --append-safecmd<span class="token operator">=</span>diff-safecmd.cfg <span class="token parameter variable">--config</span><span class="token operator">=</span>diff-config.cfg
+
+pdflatex <span class="token function">diff</span>
+bibtex <span class="token function">diff</span>
+pdflatex <span class="token function">diff</span>
+pdflatex <span class="token function">diff</span></code></pre>
+<h2 id="bonus" tabindex="-1">Bonus <a class="header-anchor" href="#bonus">#</a></h2>
+<p>I also like to use <code>\usepackage{todonotes}</code> to highlight specific reviewer comments next to my changes. To do that, I only need to add <code>\todo{}</code> in your new LaTeX files.</p>
+<p>For example, below is an example of the marked-up revision for our CHI'23 paper <a href="https://dl.acm.org/doi/10.1145/3544548.3580816">GAM Coach</a> using <code>latexdiff</code> and <code>todonotes</code>.</p>
+<p><a href="https://dl.acm.org/doi/10.1145/3544548.3580816"><img src="https://i.imgur.com/FeDTn7c.png" width="100%"></a></p>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Previous:
+            <a href="/add-paper-page-num.html">Simple Methods to Add Page Numbers in Your CS Papers</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /paper-revision-markup.html -->
+  </body>
+</html>

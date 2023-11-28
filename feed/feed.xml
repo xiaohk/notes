@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:base="en">
+	<title>Jay&#39;s Notes</title>
+	<subtitle>Notes about research, technology, and AI.</subtitle>
+	<link href="https://notes.zijie.wang/feed/feed.xml" rel="self"/>
+	<link href="https://notes.zijie.wang/"/>
+	<updated>2023-11-27T00:00:00Z</updated>
+	<id>https://notes.zijie.wang/</id>
+	<author>
+		<name>Jay Wang</name>
+		<email>jay@zijie.wang</email>
+	</author>
+	
+	<entry>
+		<title>How to Mark Up Paper Revisions with LaTeX</title>
+		<link href="https://notes.zijie.wang/paper-revision-markup.html"/>
+		<updated>2023-11-27T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/paper-revision-markup.html</id>
+		<content type="html">&lt;h1 id=&quot;how-to-mark-up-paper-revisions-with-latex&quot; tabindex=&quot;-1&quot;&gt;How to Mark Up Paper Revisions with LaTeX &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Below are three steps to highlight changes made in a paper revision with LaTeX.&lt;/p&gt;
+&lt;h2 id=&quot;step-1-generate-a-submission-snapshot&quot; tabindex=&quot;-1&quot;&gt;Step 1. Generate a submission snapshot &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We first take a snapshot of the last version of the LaTeX project before the paper&#39;s original submission. If you use Git to version control your project, it is easy to checkout the exact version used for the original submission.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Use &lt;code&gt;latexpand&lt;/code&gt; to flatten the LaTeX structure. It combines all LaTeX files into one file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# After submission, before revision&lt;/span&gt;
+latexpand --empty-comments f01-main.tex &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; submission.tex&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;If you are updating any figure, give it a new name (e.g., &lt;code&gt;figures/{figure-name}-old.pdf&lt;/code&gt;) and update its reference in &lt;code&gt;submission.tex&lt;/code&gt;. We need to have both the old figure and new figure to show the differences in Step 3.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;step-2-generate-a-revision-snapshot&quot; tabindex=&quot;-1&quot;&gt;Step 2. Generate a revision snapshot &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Once you have made all the revisions, you can take a snapshot of the latest version similar to Step 1.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# After revision&lt;/span&gt;
+latexpand --empty-comments f01-main.tex &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; revision.tex&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;step-3-highlight-the-changes&quot; tabindex=&quot;-1&quot;&gt;Step 3. Highlight the changes &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We use &lt;code&gt;latexdiff&lt;/code&gt; to highlight the changes made during the revision.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Copy your &lt;code&gt;submission.tex&lt;/code&gt; and all old figures (e.g., &lt;code&gt;figures/{figure-name}-old.pdf&lt;/code&gt;) to your current project directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create three configuration files for &lt;code&gt;latexdiff&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can copy my configuration into three files &lt;code&gt;diff-preamble.tex&lt;/code&gt;, &lt;code&gt;diff-config.cfg&lt;/code&gt;, and &lt;code&gt;diff-safecomp.cfg&lt;/code&gt;. You can learn more about the configurations on &lt;a href=&quot;https://mirrors.mit.edu/CTAN/support/latexdiff/doc/latexdiff-man.pdf&quot;&gt;latexidff&#39;s documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;File 1:&lt;/strong&gt; &lt;code&gt;diff-preamble.tex&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This file defines how to style the additions and deletions.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;% [diff-preamble.tex]&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;RequirePackage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;normalem&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;ulem&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;RequirePackage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;color&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;definecolor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;RED&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;rgb&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;1,0,0&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;definecolor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;BLUE&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;rgb&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;0,0,1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFadd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;protect&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;BLUE&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdel&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;protect&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;RED&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;sout&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFaddbegin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFaddend&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdelbegin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdelend&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFaddFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFadd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdelFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;1&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdel&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% I don&#39;t like the default undercurl for added text, so I commented it out below&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% &#92;providecommand{&#92;DIFdelFL}[1]{}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFaddbeginFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFaddendFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdelbeginFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;providecommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;DIFdelendFL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;File 2:&lt;/strong&gt; &lt;code&gt;diff-config.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This file tells &lt;code&gt;latexdiff&lt;/code&gt; to show the deleted image in the original scale.&lt;/p&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token assign-left variable&quot;&gt;SCALEDELGRAPHICS&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;File 3:&lt;/strong&gt; &lt;code&gt;diff-config.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This file tells &lt;code&gt;latexdiff&lt;/code&gt; what are the &amp;quot;safe commands&amp;quot; that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, &lt;code&gt;myquote&lt;/code&gt; is a macro of &lt;code&gt;&#92;newcommand*&#92;myquote[1]{``&#92;textit{#1}&#39;&#39;}&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-text&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;myquote
+multirow&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;Generate &lt;code&gt;diff.tex&lt;/code&gt; using &lt;code&gt;latexdiff&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;latexdiff submission.tex revision.tex &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; diff.tex --graphics-markup&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-p&lt;/span&gt; diff-preamble.tex --append-safecmd&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;diff-safecmd.cfg &lt;span class=&quot;token parameter variable&quot;&gt;--config&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;diff-config.cfg&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;Generate &lt;code&gt;diff.pdf&lt;/code&gt; from &lt;code&gt;diff.tex&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+bibtex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;🎉 Open &lt;code&gt;diff.pdf&lt;/code&gt;, you should see all revision changes to text and figures being highlighted.&lt;/p&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;[Recommended] Finally, to speed up the generation process, you can combine all commands into a bash script and run it instead: &lt;code&gt;zsh diff-generate.sh&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# [diff-generate.sh]&lt;/span&gt;
+
+latexpand --empty-comments f01-main.tex &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; revision.tex
+
+latexdiff submission.tex revision.tex &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; diff.tex --graphics-markup&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token parameter variable&quot;&gt;-p&lt;/span&gt; diff-preamble.tex --append-safecmd&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;diff-safecmd.cfg &lt;span class=&quot;token parameter variable&quot;&gt;--config&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;diff-config.cfg
+
+pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+bibtex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
+pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;bonus&quot; tabindex=&quot;-1&quot;&gt;Bonus &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;I also like to use &lt;code&gt;&#92;usepackage{todonotes}&lt;/code&gt; to highlight specific reviewer comments next to my changes. To do that, I only need to add &lt;code&gt;&#92;todo{}&lt;/code&gt; in your new LaTeX files.&lt;/p&gt;
+&lt;p&gt;For example, below is an example of the marked-up revision for our CHI&#39;23 paper &lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;GAM Coach&lt;/a&gt; using &lt;code&gt;latexdiff&lt;/code&gt; and &lt;code&gt;todonotes&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;&lt;img src=&quot;https://i.imgur.com/FeDTn7c.png&quot; width=&quot;100%&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Simple Methods to Add Page Numbers in Your CS Papers</title>
+		<link href="https://notes.zijie.wang/add-paper-page-num.html"/>
+		<updated>2023-02-15T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/add-paper-page-num.html</id>
+		<content type="html">&lt;h1 id=&quot;simple-methods-to-add-page-numbers-in-your-cs-papers&quot; tabindex=&quot;-1&quot;&gt;Simple Methods to Add Page Numbers in Your CS Papers &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-paper-page-num.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;table&gt;
+&lt;tr&gt;
+  &lt;td&gt; Conference &lt;/td&gt; &lt;td&gt; Method &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/portal/&quot;&gt;ACM conferences&lt;/a&gt; (e.g., CHI, KDD, WebConf, CIKM that use the &lt;a href=&quot;https://github.com/borisveytsman/acmart&quot;&gt;&lt;code&gt;acmart&lt;/code&gt; LaTeX style&lt;/a&gt;)&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p&gt;Use &lt;code&gt;&#92;settopmatter{printfolios=true}&lt;/code&gt; right after &lt;code&gt;&#92;documentclass&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;documentclass&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;sigconf, screen&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;acmart&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;settopmatter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;printfolios=true&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/portal/&quot;&gt;ACL conferences&lt;/a&gt; (e.g., ACL, NAACL, EACL, EMNLP)&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p&gt;Comment out &lt;code&gt;&#92;pagestyle{empty}&lt;/code&gt; in the conference style file (e.g., &lt;code&gt;acl2023.sty&lt;/code&gt;)&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;ifacl&lt;/span&gt;@finalcopy
+    &lt;span class=&quot;token comment&quot;&gt;% &#92;thispagestyle{empty}&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;% &#92;pagestyle{empty}&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;pagenumbering&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;arabic&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;else&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;pagenumbering&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;arabic&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;fi&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/portal/&quot;&gt;IEEE VIS&lt;/a&gt; (or &lt;a href=&quot;https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=2945&quot;&gt;TVCG&lt;/a&gt; and some other IEEE conferences)&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p&gt;Use the &lt;code&gt;preprint&lt;/code&gt; option for the &lt;code&gt;vgtc&lt;/code&gt; LaTeX style file.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;documentclass&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;preprint&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;vgtc&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.aclweb.org/portal/&quot;&gt;NeurIPS&lt;/a&gt;&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p&gt;Use the &lt;code&gt;preprint&lt;/code&gt; or the &lt;code&gt;final&lt;/code&gt; option for the &lt;code&gt;neurips&lt;/code&gt; LaTeX style file.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;usepackage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;preprint&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;neurips_2022&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;usepackage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;final&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;neurips_2022&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>How To Make ACM TAPS Happy?</title>
+		<link href="https://notes.zijie.wang/how-to-make-taps-happy.html"/>
+		<updated>2023-02-10T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/how-to-make-taps-happy.html</id>
+		<content type="html">&lt;h1 id=&quot;how-to-make-acm-taps-happy&quot; tabindex=&quot;-1&quot;&gt;How To Make ACM TAPS Happy? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Here are some tips and tricks to make ACM TAPS stop complaining about your LaTeX source submission.&lt;/p&gt;
+&lt;h3 id=&quot;1-only-use-acm-permitted-packages&quot; tabindex=&quot;-1&quot;&gt;1. Only use ACM permitted packages &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Remove all packages that are not listed in this &lt;a href=&quot;https://authors.acm.org/proceedings/production-information/accepted-latex-packages&quot;&gt;webpage&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;2-add-short-description-for-caption-commands&quot; tabindex=&quot;-1&quot;&gt;2. Add short description for &lt;code&gt;&#92;caption&lt;/code&gt; commands &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For example, change &lt;code&gt;&#92;caption{This is a figure...}&lt;/code&gt; to &lt;code&gt;&#92;caption[]{This is a figure...}&lt;/code&gt; in your figures and tables.&lt;/p&gt;
+&lt;h3 id=&quot;3-remove-in-file-references&quot; tabindex=&quot;-1&quot;&gt;3. Remove &lt;code&gt;./&lt;/code&gt; in file references &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Refer to figure files without &lt;code&gt;./&lt;/code&gt;. Change &lt;code&gt;&#92;includegraphics[width=&#92;linewidth]{./figures/dog.pdf}&lt;/code&gt; to &lt;code&gt;&#92;includegraphics[width=&#92;linewidth]{figures/dog.pdf}&lt;/code&gt; in figure environments.&lt;/p&gt;
+&lt;h3 id=&quot;4-do-not-use-self-defined-macros-in-equations&quot; tabindex=&quot;-1&quot;&gt;4. Do not use self-defined macros in equations &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;For example, change &lt;code&gt;$&#92;mcolor{myred}{x}$&lt;/code&gt; to &lt;code&gt;$&#92;textcolor[HTML]{E03177}{x}$&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;5-use-aptltox-to-have-different-latex-code-for-different-targets-pdf-and-html&quot; tabindex=&quot;-1&quot;&gt;5. Use &lt;code&gt;&#92;aptLtoX{}&lt;/code&gt; to have different LaTeX code for different targets (PDF and HTML) &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;First add the below &lt;code&gt;acmart-taps.sty&lt;/code&gt; file in your source directory:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;% &quot;acmart-taps.sty&quot;&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% This is a patch file for acmart class file&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% Develop by Ranjan&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% Dated 2019-03-08&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% Below commands and environment is compatible to TAPS system&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;newenvironment&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;imageonly&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;DeclareOldFontCommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;bi&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;bfseries&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;itshape&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;bfseries&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;itshape&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatletter&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ifundefined&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;tabnote&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;newenvironment&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;tabnote&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;newcounter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;sidebartable&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;newcounter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figuresidebar&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;newcounter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;floatsidebar&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;let&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;bm&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;boldsymbol&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;def&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;aptLtoXcmd&lt;/span&gt;#1#2&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;long&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;def&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;aptLtoX&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ifnextchar&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;aptLtoX&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;aptLtoX&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;long&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;def&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;aptLtoX&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;#2#3&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#3&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;def&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;aptLtoXdel&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatother&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;endinput&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then you can use &lt;code&gt;aptLtoXdel&lt;/code&gt; in your LaTeX code when you want to write different code to generate PDF and HTML files. For example, if you only want to change underline color in PDF, you can wraps &lt;code&gt;&#92;setulcolor{gray}&lt;/code&gt; as below:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;aptLtoX&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;graphic=no, type=html&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;% LaTeX for HTML target&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;% Pass&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;% LaTeX for PDF target&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;setulcolor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;gray&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;6-you-can-use-looseness-x-in-latex&quot; tabindex=&quot;-1&quot;&gt;6. You can use &lt;code&gt;&#92;looseness=x&lt;/code&gt; in LaTeX &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;TAPS team might remove &lt;code&gt;&#92;looseness=x&lt;/code&gt; from your code, but it is actually compatible with TAPS.&lt;/p&gt;
+&lt;h3 id=&quot;7-you-cannot-use-phantomsection&quot; tabindex=&quot;-1&quot;&gt;7. You cannot use &lt;code&gt;&#92;phantomsection&lt;/code&gt; &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;TAPS breaks when you have any &lt;code&gt;&#92;phantomsection&lt;/code&gt;. If you really want to use it, wrap it with &lt;code&gt;aptLtoX&lt;/code&gt;: e.g., &lt;code&gt;&#92;aptLtoX[graphic=no, type=html]{}{&#92;phantomsection}&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;8-wrap-everything-in-cjk-if-you-have-chinese-japanese-korean-characters&quot; tabindex=&quot;-1&quot;&gt;8. Wrap everything in &lt;code&gt;CJK*&lt;/code&gt; if you have Chinese/Japanese/Korean characters &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;TAPS would suggest you wrapping the entire document inside the CJK UTF8 environment.&lt;/p&gt;
+&lt;p&gt;For example, instead of applying CJK* locally like:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;The translation is &lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;CJK*&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;UTF8&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;gbsn&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;``你好&#39;&#39;&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;CJK*&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can wrap the LaTeX document in &lt;code&gt;CJK*&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-&#92;latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-&#92;latex&quot;&gt;&#92;begin{document}
+&#92;begin{CJK*}{UTF8}{gkai}
+
+% xxx
+
+&#92;end{CJK*}
+&#92;end{document}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Also, TAPS is unhappy with CJK characters in the &lt;code&gt;&#92;Description{}&lt;/code&gt; command. They would suggest you to comment out the &lt;code&gt;&#92;Description{}&lt;/code&gt; with CJK characters.&lt;/p&gt;
+&lt;h3 id=&quot;9-taps-doesn-t-like-enumitem&quot; tabindex=&quot;-1&quot;&gt;9. TAPS doesn&#39;t like &lt;code&gt;enumitem&lt;/code&gt; &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Wrap your &lt;code&gt;enumitem&lt;/code&gt; lists (e.g., &lt;code&gt;itemize&lt;/code&gt; and &lt;code&gt;enumerate&lt;/code&gt;) in &lt;code&gt;&#92;aptLtoX&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;For example, change below list:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;topsep=5pt, itemsep=0mm, parsep=1mm, leftmargin=30pt, label=&lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;D&lt;span class=&quot;token function selector&quot;&gt;&#92;arabic*&lt;/span&gt;.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;, ref=D&lt;span class=&quot;token function selector&quot;&gt;&#92;arabic*&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    My item 1.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    My item 2.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt; &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    My item 3.
+&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to a wrapped list with two variants:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;aptLtoX&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;graphic=no,type=html&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% Used for HTML conversion&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;D1.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 1.
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;D2.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 2.
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;D3.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 3.
+&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% Used for PDF rendering&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;topsep=5pt, itemsep=0mm, parsep=1mm, leftmargin=30pt, label=&lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;D&lt;span class=&quot;token function selector&quot;&gt;&#92;arabic*&lt;/span&gt;.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;, ref=D&lt;span class=&quot;token function selector&quot;&gt;&#92;arabic*&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 1.
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 2.
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;item&lt;/span&gt; &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;item:d3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  My item 3.
+&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&quot;10-limited-equation-support&quot; tabindex=&quot;-1&quot;&gt;10. Limited Equation Support &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;TAPS has limited support for the equation environments. For example, you cannot use &lt;code&gt;[1em]&lt;/code&gt; to &lt;a href=&quot;https://tex.stackexchange.com/questions/14679/amsmath-align-environment-row-spacing&quot;&gt;stretch equation rows&lt;/a&gt; in an &lt;code&gt;align&lt;/code&gt; environment.&lt;/p&gt;
+&lt;p&gt;You can also not use &lt;code&gt;aligned&lt;/code&gt; inside an &lt;code&gt;align&lt;/code&gt; environment to create multi-line rows. A workaround is to use &lt;code&gt;&#92;nonumber&lt;/code&gt; in these multi-line rows directly.&lt;/p&gt;
+&lt;h3 id=&quot;11-email-taps-to-cancel-a-submission&quot; tabindex=&quot;-1&quot;&gt;11. Email TAPS to cancel a submission &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;It usually takes about 4–6 days for TAPS team to debug your failed submissions. If you want to debug yourself (e.g., trying out different workarounds), you can email the TAPS support team to withdraw your failed submission so that you can resubmit again. It only takes about 1–3 hours for TAPS to re-open the submission for you.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&quot;finally-watch-out-for-hidden-errors-in-the-generated-html-file&quot; tabindex=&quot;-1&quot;&gt;Finally, watch out for hidden errors in the generated HTML file &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/how-to-make-taps-happy.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Congratulations on making it this far! 🎉 Following all these steps, it&#39;s highly likely that TAPS can now successfully generate an HTML version of your paper. However, be aware that TAPS may have also introduced some &amp;quot;hidden&amp;quot; HTML-specific errors. Therefore, it&#39;s a good idea to skim through the HTML file to catch these errors.&lt;/p&gt;
+&lt;p&gt;For instance, if you&#39;ve used &lt;code&gt;hspace{10px}&lt;/code&gt; in your equation, there may be some random &lt;code&gt;px&lt;/code&gt; present in your equation within the HTML file. To resolve these issues, you will need to adjust your LaTeX code accordingly (e.g., use &lt;code&gt;&#92;quad&lt;/code&gt; instead of &lt;code&gt;hspace{10px}&lt;/code&gt;).&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>How to Add CC Block for ACM Preprints?</title>
+		<link href="https://notes.zijie.wang/add-acm-cc-block.html"/>
+		<updated>2023-01-26T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/add-acm-cc-block.html</id>
+		<content type="html">&lt;h2 id=&quot;create-a-cc-block-for-acm-preprints&quot; tabindex=&quot;-1&quot;&gt;Create a CC Block for ACM Preprints &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-cc-block.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here are two methods to create a nice CC copyright block for your ACM preprint.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/372xtUH.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;First, you need to check your &lt;code&gt;acmart.cls&lt;/code&gt; version (you can find it from the first 50 lines of this file).&lt;/p&gt;
+&lt;h2 id=&quot;version-v1-87&quot; tabindex=&quot;-1&quot;&gt;version &amp;gt;= v1.87 &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-cc-block.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;The newer acmart style comes with CC support! However, it only works if you are using &lt;code&gt;noacm&lt;/code&gt; option. You can bypass the constraint by modifying the &lt;code&gt;acmart.cls&lt;/code&gt; file.&lt;/p&gt;
+&lt;p&gt;Comment out the following code in &lt;code&gt;acmart.cls&lt;/code&gt; (line 1937 in v1.87):&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;% &#92;ClassError{&#92;@classname}{%&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%   Sorry, Creative Commons licenses are&#92;MessageBreak&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%   currently not used with ACM publications&#92;MessageBreak&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%   typeset by the authors}{Please use nonacm&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%      option or ACM Engage class to enable CC licenses}%&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, you can use the &lt;code&gt;cc&lt;/code&gt; copyright by adding the following code in your source &lt;code&gt;.tex&lt;/code&gt; file:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;setcopyright&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;cc&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;setcctype&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;4.0&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;by&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;version-v1-87-1&quot; tabindex=&quot;-1&quot;&gt;version &amp;lt; v1.87 &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-cc-block.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;We can use &lt;code&gt;etoolbox&lt;/code&gt; to override the special command &lt;code&gt;@copyrightpermission&lt;/code&gt; defined in &lt;code&gt;acmart.cls&lt;/code&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download &lt;code&gt;cc-by4.pdf&lt;/code&gt; from &lt;a href=&quot;https://en.wikipedia.org/wiki/Creative_Commons_license#/media/File:CC_BY_icon.svg&quot;&gt;here&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Add the following code in your &lt;code&gt;.tex&lt;/code&gt; source file (make sure it is before &lt;code&gt;&#92;maketitle&lt;/code&gt; comamnd)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;setcopyright&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;rightsretained&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;% .... Other conference info ...&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;% Add CC figure&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;usepackage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;etoolbox&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatletter&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;tracingpatches&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;patchcmd&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;maketitle&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;copyrightpermission&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;minipage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;0.3&lt;span class=&quot;token function selector&quot;&gt;&#92;columnwidth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token function selector&quot;&gt;&#92;href&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&amp;lt;https://creativecommons.org/licenses/by/4.0/&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;includegraphics&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;width=0.90&lt;span class=&quot;token function selector&quot;&gt;&#92;textwidth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figures/cc-by4.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;minipage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;hfill&lt;/span&gt;
+   &lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;minipage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;0.7&lt;span class=&quot;token function selector&quot;&gt;&#92;columnwidth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token function selector&quot;&gt;&#92;href&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&amp;lt;https://creativecommons.org/licenses/by/4.0/&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;This work is licensed under a Creative Commons Attribution International 4.0 License.&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+   &lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;minipage&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+   &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;5pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatletter&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>How to Submit Papers to arXiv?</title>
+		<link href="https://notes.zijie.wang/arxiv-preparation.html"/>
+		<updated>2020-04-30T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/arxiv-preparation.html</id>
+		<content type="html">&lt;h1 id=&quot;how-to-submit-papers-to-arxiv&quot; tabindex=&quot;-1&quot;&gt;How to Submit Papers to arXiv? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/arxiv-preparation.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;h2 id=&quot;submission-steps&quot; tabindex=&quot;-1&quot;&gt;Submission Steps &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/arxiv-preparation.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download source code from Overleaf if you use it: &lt;code&gt;menu&lt;/code&gt; -&amp;gt; &lt;code&gt;download&lt;/code&gt; -&amp;gt; &lt;code&gt;source&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Strip comments and combine all &lt;code&gt;tex&lt;/code&gt; files (&lt;code&gt;f01-main.tex&lt;/code&gt;, &lt;code&gt;f02-intro.tex&lt;/code&gt;, etc.) into one file &lt;code&gt;arxiv_main.tex&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-[bash]&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-[bash]&quot;&gt;# Replace f01-main.tex with the main tex file in your overleaf project
+latexpand --empty-comments f01-main.tex &gt; arxiv_main.tex&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Create a new directory and copy only essential files into it (&lt;code&gt;arxiv_main.tex&lt;/code&gt;, style files, figures, etc.).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Compile &lt;code&gt;arxiv_main.tex&lt;/code&gt; with BibTeX in your new directory by running the following four commands. The main purpose of this step is to generate a &lt;code&gt;.bbl&lt;/code&gt; file. You would need to run &lt;code&gt;pdflatex&lt;/code&gt; three times. Check if the generated &lt;code&gt;arxiv_main.pdf&lt;/code&gt; looks correct.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-[bash]&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-[bash]&quot;&gt;pdflatex arxiv_main
+bibtex arxiv_main
+pdflatex arxiv_main
+pdflatex arxiv_main&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;Zip all files inside the directory (don&#39;t include the directory itself). Upload the tarball file &lt;code&gt;arxiv.tar.gz&lt;/code&gt; to arXiv.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&quot;language-[bash]&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-[bash]&quot;&gt;tar czvf arxiv.tar.gz ./*&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;when-to-post-on-arxiv&quot; tabindex=&quot;-1&quot;&gt;When to Post on arXiv? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/arxiv-preparation.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;The &amp;quot;deadlines&amp;quot; of arXiv submission&lt;/li&gt;
+&lt;/ol&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Submissions received between (all times Eastern US)&lt;/th&gt;
+&lt;th&gt;Will be announced (all times Eastern US)&lt;/th&gt;
+&lt;th&gt;Mailed to subscribers&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Monday 14:00 – Tuesday 14:00&lt;/td&gt;
+&lt;td&gt;Tuesday 20:00&lt;/td&gt;
+&lt;td&gt;Tuesday night / Wednesday morning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Tuesday 14:00 – Wednesday 14:00&lt;/td&gt;
+&lt;td&gt;Wednesday 20:00&lt;/td&gt;
+&lt;td&gt;Wednesday night / Thursday morning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Wednesday 14:00 – Thursday 14:00&lt;/td&gt;
+&lt;td&gt;Thursday 20:00&lt;/td&gt;
+&lt;td&gt;Thursday night / Friday morning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Thursday 14:00 – Friday 14:00&lt;/td&gt;
+&lt;td&gt;Sunday 20:00&lt;/td&gt;
+&lt;td&gt;Sunday night / Monday morning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Friday 14:00 – Monday 14:00&lt;/td&gt;
+&lt;td&gt;Monday 20:00&lt;/td&gt;
+&lt;td&gt;Monday night / Tuesday morning&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;If you post between &lt;strong&gt;Wednesday 14:00 – Thursday 14:00&lt;/strong&gt;, it will be announced on Thursday 20:00 and be on the arXiv front-page for &lt;strong&gt;three days&lt;/strong&gt;. This is because the next announcement will be on Sunday 20:00. This is the best day to post on arXiv if you want to maximize the exposure.&lt;/li&gt;
+&lt;li&gt;By default, arXiv orders submissions by &amp;quot;recentness&amp;quot;. Therefore, if you submit &lt;strong&gt;right before 14:00&lt;/strong&gt;, it is more likely to be listed on the first page of the list (top 25 most recent submissions). On Thursday, there are usually about 70-100 machine learning submissions (3-4 pages!)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;troubleshooting&quot; tabindex=&quot;-1&quot;&gt;Troubleshooting &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/arxiv-preparation.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;⚠️ &lt;code&gt;latexpand --empty-comments&lt;/code&gt; does not remove comments in &lt;code&gt;&#92;begin{comment}&#92;end{comment}&lt;/code&gt;. If you write comments other than the native way &lt;code&gt;%&lt;/code&gt;, you can use &lt;a href=&quot;https://github.com/google-research/arxiv-latex-cleaner&quot;&gt;arxiv-latex-cleaner&lt;/a&gt; to clean comments.&lt;/li&gt;
+&lt;li&gt;Check out the &lt;a href=&quot;https://www.overleaf.com/learn/how-to/LaTeX_checklist_for_arXiv_submissions&quot;&gt;checklist for arXiv submission from Overleaf&lt;/a&gt; (Thanks &lt;a href=&quot;https://github.com/bhoov&quot;&gt;@bhoov&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Remember to keep your primary &lt;code&gt;.tex&lt;/code&gt; file in the root level of the repository&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;natbib&lt;/code&gt; in an unsorted number style does not work on ArXiv. Solution: remove &lt;code&gt;natbib&lt;/code&gt; as a dependency, use &lt;code&gt;&#92;bibliographystyle{unsrt}&lt;/code&gt; instead of &lt;code&gt;&#92;bibliographystyle{unsrtnat}&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;best-practices&quot; tabindex=&quot;-1&quot;&gt;Best Practices &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/arxiv-preparation.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Now arXiv can successfully compile your LeTeX file! 🎉 Here are some tips to make the generated PDF look great.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Double check the generated PDF.&lt;/strong&gt; It&#39;s likely that arXiv is using a different LaTeX version from yours, resulting in a different-looking PDF.
+&lt;ol&gt;
+&lt;li&gt;If you use PDFLaTeX to compile LaTeX files locally, &lt;a href=&quot;https://info.arxiv.org/help/submit_tex.html#pdflatex&quot;&gt;you can set &lt;code&gt;&#92;pdfoutput=1&lt;/code&gt;&lt;/a&gt; in the start of your &lt;code&gt;arxiv_main.tex&lt;/code&gt; to force arXiv to also use PDFLaTeX.&lt;/li&gt;
+&lt;li&gt;Sometimes arXiv would mess up with the microtype for full justification papers, especially in section headers and figure captions (e.g., adding a new line). Double check the generated PDF and modify the text when needed. One way to avoid new lines is to wrap your text in &lt;code&gt;&#92;mbox{}&lt;/code&gt; and force LaTeX to overflow that line.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Add page numbers.&lt;/strong&gt; Typically conference style files hide page numbers, so that all accepted papers can bundled into a conference proceeding with a proceeding page number. However, preprints with page numbers are easier to read. Here is a &lt;a href=&quot;https://notes.zijie.wang/add-paper-page-num.html&quot;&gt;simple guide&lt;/a&gt; to add page number for different popular CS conference LaTeX templates.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use the correct copyright block&lt;/strong&gt; (especially for ACM conferences). Make sure your preprint PDF claims the correct copyright license (e.g., CC, IW3C2W3, rightsretained). For ACM conferences, you can change the copyright block with the command &lt;code&gt;setcopyright{}&lt;/code&gt;. However, if your paper has a Creative Common (CC) license, you would need &lt;a href=&quot;https://notes.zijie.wang/add-acm-cc-block.html&quot;&gt;some hacks&lt;/a&gt; to make it work.&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+	</entry>
+</feed>

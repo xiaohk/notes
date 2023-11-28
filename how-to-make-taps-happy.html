@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How To Make ACM TAPS Happy?</title>
+    <meta
+    name="description" content="Tips and tricks to prepare your ACM TAPS submission">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+    
+    
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes" class="filename">how-to-make-taps-happy.md</a>
+
+      <div>
+        <time datetime="2023-02-10">10 February 2023</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 id="how-to-make-acm-taps-happy" tabindex="-1">How To Make ACM TAPS Happy? <a class="header-anchor" href="#how-to-make-acm-taps-happy">#</a></h1>
+<p>Here are some tips and tricks to make ACM TAPS stop complaining about your LaTeX source submission.</p>
+<h3 id="1-only-use-acm-permitted-packages" tabindex="-1">1. Only use ACM permitted packages <a class="header-anchor" href="#1-only-use-acm-permitted-packages">#</a></h3>
+<p>Remove all packages that are not listed in this <a href="https://authors.acm.org/proceedings/production-information/accepted-latex-packages">webpage</a>.</p>
+<h3 id="2-add-short-description-for-caption-commands" tabindex="-1">2. Add short description for <code>\caption</code> commands <a class="header-anchor" href="#2-add-short-description-for-caption-commands">#</a></h3>
+<p>For example, change <code>\caption{This is a figure...}</code> to <code>\caption[]{This is a figure...}</code> in your figures and tables.</p>
+<h3 id="3-remove-in-file-references" tabindex="-1">3. Remove <code>./</code> in file references <a class="header-anchor" href="#3-remove-in-file-references">#</a></h3>
+<p>Refer to figure files without <code>./</code>. Change <code>\includegraphics[width=\linewidth]{./figures/dog.pdf}</code> to <code>\includegraphics[width=\linewidth]{figures/dog.pdf}</code> in figure environments.</p>
+<h3 id="4-do-not-use-self-defined-macros-in-equations" tabindex="-1">4. Do not use self-defined macros in equations <a class="header-anchor" href="#4-do-not-use-self-defined-macros-in-equations">#</a></h3>
+<p>For example, change <code>$\mcolor{myred}{x}$</code> to <code>$\textcolor[HTML]{E03177}{x}$</code>.</p>
+<h3 id="5-use-aptltox-to-have-different-latex-code-for-different-targets-pdf-and-html" tabindex="-1">5. Use <code>\aptLtoX{}</code> to have different LaTeX code for different targets (PDF and HTML) <a class="header-anchor" href="#5-use-aptltox-to-have-different-latex-code-for-different-targets-pdf-and-html">#</a></h3>
+<p>First add the below <code>acmart-taps.sty</code> file in your source directory:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% "acmart-taps.sty"</span>
+<span class="token comment">% This is a patch file for acmart class file</span>
+<span class="token comment">% Develop by Ranjan</span>
+<span class="token comment">% Dated 2019-03-08</span>
+<span class="token comment">% Below commands and environment is compatible to TAPS system</span>
+
+<span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>imageonly<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\DeclareOldFontCommand</span><span class="token punctuation">{</span><span class="token function selector">\bi</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\bfseries</span><span class="token function selector">\itshape</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\bfseries</span><span class="token function selector">\itshape</span><span class="token punctuation">}</span>
+<span class="token function selector">\makeatletter</span>
+<span class="token function selector">\@</span>ifundefined<span class="token punctuation">{</span>tabnote<span class="token punctuation">}</span><span class="token punctuation">{</span>
+  <span class="token function selector">\newenvironment</span><span class="token punctuation">{</span>tabnote<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\newcounter</span><span class="token punctuation">{</span>sidebartable<span class="token punctuation">}</span>
+<span class="token function selector">\newcounter</span><span class="token punctuation">{</span>figuresidebar<span class="token punctuation">}</span>
+<span class="token function selector">\newcounter</span><span class="token punctuation">{</span>floatsidebar<span class="token punctuation">}</span>
+<span class="token function selector">\let</span><span class="token function selector">\bm</span><span class="token function selector">\boldsymbol</span>
+<span class="token function selector">\def</span><span class="token function selector">\aptLtoXcmd</span>#1#2<span class="token punctuation">{</span>#2<span class="token punctuation">}</span>
+<span class="token function selector">\long</span><span class="token function selector">\def</span><span class="token function selector">\aptLtoX</span><span class="token punctuation">{</span><span class="token function selector">\@</span>ifnextchar<span class="token punctuation">[</span><span class="token punctuation">{</span><span class="token function selector">\@</span>aptLtoX<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\@</span>aptLtoX<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+<span class="token function selector">\long</span><span class="token function selector">\def</span><span class="token function selector">\@</span>aptLtoX<span class="token punctuation">[</span>#1<span class="token punctuation">]</span>#2#3<span class="token punctuation">{</span>#3<span class="token punctuation">}</span>
+<span class="token function selector">\def</span><span class="token function selector">\aptLtoXdel</span>#1<span class="token punctuation">{</span><span class="token punctuation">}</span>
+<span class="token function selector">\makeatother</span>
+
+<span class="token function selector">\endinput</span></code></pre>
+<p>Then you can use <code>aptLtoXdel</code> in your LaTeX code when you want to write different code to generate PDF and HTML files. For example, if you only want to change underline color in PDF, you can wraps <code>\setulcolor{gray}</code> as below:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\aptLtoX</span><span class="token punctuation">[</span>graphic=no, type=html<span class="token punctuation">]</span><span class="token punctuation">{</span>
+  <span class="token comment">% LaTeX for HTML target</span>
+  <span class="token comment">% Pass</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span>
+  <span class="token comment">% LaTeX for PDF target</span>
+  <span class="token function selector">\setulcolor</span><span class="token punctuation">{</span>gray<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="6-you-can-use-looseness-x-in-latex" tabindex="-1">6. You can use <code>\looseness=x</code> in LaTeX <a class="header-anchor" href="#6-you-can-use-looseness-x-in-latex">#</a></h3>
+<p>TAPS team might remove <code>\looseness=x</code> from your code, but it is actually compatible with TAPS.</p>
+<h3 id="7-you-cannot-use-phantomsection" tabindex="-1">7. You cannot use <code>\phantomsection</code> <a class="header-anchor" href="#7-you-cannot-use-phantomsection">#</a></h3>
+<p>TAPS breaks when you have any <code>\phantomsection</code>. If you really want to use it, wrap it with <code>aptLtoX</code>: e.g., <code>\aptLtoX[graphic=no, type=html]{}{\phantomsection}</code>.</p>
+<h3 id="8-wrap-everything-in-cjk-if-you-have-chinese-japanese-korean-characters" tabindex="-1">8. Wrap everything in <code>CJK*</code> if you have Chinese/Japanese/Korean characters <a class="header-anchor" href="#8-wrap-everything-in-cjk-if-you-have-chinese-japanese-korean-characters">#</a></h3>
+<p>TAPS would suggest you wrapping the entire document inside the CJK UTF8 environment.</p>
+<p>For example, instead of applying CJK* locally like:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex">The translation is <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span><span class="token punctuation">{</span>UTF8<span class="token punctuation">}</span><span class="token punctuation">{</span>gbsn<span class="token punctuation">}</span>``你好''<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span>.</code></pre>
+<p>You can wrap the LaTeX document in <code>CJK*</code>:</p>
+<pre class="language-\latex" tabindex="0"><code class="language-\latex">\begin{document}
+\begin{CJK*}{UTF8}{gkai}
+
+% xxx
+
+\end{CJK*}
+\end{document}</code></pre>
+<p>Also, TAPS is unhappy with CJK characters in the <code>\Description{}</code> command. They would suggest you to comment out the <code>\Description{}</code> with CJK characters.</p>
+<h3 id="9-taps-doesn-t-like-enumitem" tabindex="-1">9. TAPS doesn't like <code>enumitem</code> <a class="header-anchor" href="#9-taps-doesn-t-like-enumitem">#</a></h3>
+<p>Wrap your <code>enumitem</code> lists (e.g., <code>itemize</code> and <code>enumerate</code>) in <code>\aptLtoX</code>.</p>
+<p>For example, change below list:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span><span class="token punctuation">[</span>topsep=5pt, itemsep=0mm, parsep=1mm, leftmargin=30pt, label=<span class="token function selector">\textbf</span><span class="token punctuation">{</span>D<span class="token function selector">\arabic*</span>.<span class="token punctuation">}</span>, ref=D<span class="token function selector">\arabic*</span><span class="token punctuation">]</span>
+    <span class="token function selector">\item</span><span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d1</span><span class="token punctuation">}</span>
+    My item 1.
+    <span class="token function selector">\item</span><span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d2</span><span class="token punctuation">}</span>
+    My item 2.
+    <span class="token function selector">\item</span> <span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d3</span><span class="token punctuation">}</span>
+    My item 3.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+</code></pre>
+<p>to a wrapped list with two variants:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\aptLtoX</span><span class="token punctuation">[</span>graphic=no,type=html<span class="token punctuation">]</span><span class="token punctuation">{</span>
+<span class="token comment">% Used for HTML conversion</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+  <span class="token function selector">\item</span> <span class="token punctuation">[</span><span class="token function selector">\textbf</span><span class="token punctuation">{</span>D1.<span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d1</span><span class="token punctuation">}</span>
+  My item 1.
+  <span class="token function selector">\item</span> <span class="token punctuation">[</span><span class="token function selector">\textbf</span><span class="token punctuation">{</span>D2.<span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d2</span><span class="token punctuation">}</span>
+  My item 2.
+  <span class="token function selector">\item</span> <span class="token punctuation">[</span><span class="token function selector">\textbf</span><span class="token punctuation">{</span>D3.<span class="token punctuation">}</span><span class="token punctuation">]</span> <span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d3</span><span class="token punctuation">}</span>
+  My item 3.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">{</span>
+<span class="token comment">% Used for PDF rendering</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span><span class="token punctuation">[</span>topsep=5pt, itemsep=0mm, parsep=1mm, leftmargin=30pt, label=<span class="token function selector">\textbf</span><span class="token punctuation">{</span>D<span class="token function selector">\arabic*</span>.<span class="token punctuation">}</span>, ref=D<span class="token function selector">\arabic*</span><span class="token punctuation">]</span>
+  <span class="token function selector">\item</span><span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d1</span><span class="token punctuation">}</span>
+  My item 1.
+  <span class="token function selector">\item</span><span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d2</span><span class="token punctuation">}</span>
+  My item 2.
+  <span class="token function selector">\item</span> <span class="token function selector">\label</span><span class="token punctuation">{</span><span class="token keyword">item:d3</span><span class="token punctuation">}</span>
+  My item 3.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">enumerate</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="10-limited-equation-support" tabindex="-1">10. Limited Equation Support <a class="header-anchor" href="#10-limited-equation-support">#</a></h3>
+<p>TAPS has limited support for the equation environments. For example, you cannot use <code>[1em]</code> to <a href="https://tex.stackexchange.com/questions/14679/amsmath-align-environment-row-spacing">stretch equation rows</a> in an <code>align</code> environment.</p>
+<p>You can also not use <code>aligned</code> inside an <code>align</code> environment to create multi-line rows. A workaround is to use <code>\nonumber</code> in these multi-line rows directly.</p>
+<h3 id="11-email-taps-to-cancel-a-submission" tabindex="-1">11. Email TAPS to cancel a submission <a class="header-anchor" href="#11-email-taps-to-cancel-a-submission">#</a></h3>
+<p>It usually takes about 4–6 days for TAPS team to debug your failed submissions. If you want to debug yourself (e.g., trying out different workarounds), you can email the TAPS support team to withdraw your failed submission so that you can resubmit again. It only takes about 1–3 hours for TAPS to re-open the submission for you.</p>
+<hr>
+<h3 id="finally-watch-out-for-hidden-errors-in-the-generated-html-file" tabindex="-1">Finally, watch out for hidden errors in the generated HTML file <a class="header-anchor" href="#finally-watch-out-for-hidden-errors-in-the-generated-html-file">#</a></h3>
+<p>Congratulations on making it this far! 🎉 Following all these steps, it's highly likely that TAPS can now successfully generate an HTML version of your paper. However, be aware that TAPS may have also introduced some &quot;hidden&quot; HTML-specific errors. Therefore, it's a good idea to skim through the HTML file to catch these errors.</p>
+<p>For instance, if you've used <code>hspace{10px}</code> in your equation, there may be some random <code>px</code> present in your equation within the HTML file. To resolve these issues, you will need to adjust your LaTeX code accordingly (e.g., use <code>\quad</code> instead of <code>hspace{10px}</code>).</p>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Previous:
+            <a href="/add-acm-cc-block.html">How to Add CC Block for ACM Preprints?</a>
+        </li>
+      
+        <li>Next:
+            <a href="/add-paper-page-num.html">Simple Methods to Add Page Numbers in Your CS Papers</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /how-to-make-taps-happy.html -->
+  </body>
+</html>
