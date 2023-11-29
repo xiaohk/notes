@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to Mark Up Paper Revisions with LaTeX</title>
+    <title>How to Mark Up Paper Revisions with LaTeX?</title>
     <meta
     name="description" content="Tips on preparing paper revision with latex">
     <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
@@ -118,7 +118,7 @@ pre[class*="language-diff-"] {
   </div>
 
   <div class="content">
-    <h1 id="how-to-mark-up-paper-revisions-with-latex" tabindex="-1">How to Mark Up Paper Revisions with LaTeX <a class="header-anchor" href="#how-to-mark-up-paper-revisions-with-latex">#</a></h1>
+    <h1 id="how-to-mark-up-paper-revisions-with-latex" tabindex="-1">How to Mark Up Paper Revisions with LaTeX? <a class="header-anchor" href="#how-to-mark-up-paper-revisions-with-latex">#</a></h1>
 <p>Below are three steps to highlight changes made in a paper revision with LaTeX.</p>
 <h2 id="step-1-generate-a-submission-snapshot" tabindex="-1">Step 1. Generate a submission snapshot <a class="header-anchor" href="#step-1-generate-a-submission-snapshot">#</a></h2>
 <p>We first take a snapshot of the last version of the LaTeX project before the paper's original submission. If you use Git to version control your project, it is easy to checkout the exact version used for the original submission.</p>
@@ -168,7 +168,7 @@ latexpand --empty-comments f01-main.tex <span class="token operator">></span> re
 <p><strong>File 2:</strong> <code>diff-config.cfg</code></p>
 <p>This file tells <code>latexdiff</code> to show the deleted image in the original scale.</p>
 <pre class="language-bash" tabindex="0"><code class="language-bash"><span class="token assign-left variable">SCALEDELGRAPHICS</span><span class="token operator">=</span><span class="token number">1</span></code></pre>
-<p><strong>File 3:</strong> <code>diff-config.cfg</code></p>
+<p><strong>File 3:</strong> <code>diff-safecomp.cfg</code></p>
 <p>This file tells <code>latexdiff</code> what are the &quot;safe commands&quot; that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, <code>myquote</code> is a macro of <code>\newcommand*\myquote[1]{``\textit{#1}''}</code>.</p>
 <pre class="language-text" tabindex="0"><code class="language-text">myquote
 multirow</code></pre>

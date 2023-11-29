@@ -12,11 +12,11 @@
 	</author>
 	
 	<entry>
-		<title>How to Mark Up Paper Revisions with LaTeX</title>
+		<title>How to Mark Up Paper Revisions with LaTeX?</title>
 		<link href="https://notes.zijie.wang/paper-revision-markup.html"/>
 		<updated>2023-11-27T00:00:00Z</updated>
 		<id>https://notes.zijie.wang/paper-revision-markup.html</id>
-		<content type="html">&lt;h1 id=&quot;how-to-mark-up-paper-revisions-with-latex&quot; tabindex=&quot;-1&quot;&gt;How to Mark Up Paper Revisions with LaTeX &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+		<content type="html">&lt;h1 id=&quot;how-to-mark-up-paper-revisions-with-latex&quot; tabindex=&quot;-1&quot;&gt;How to Mark Up Paper Revisions with LaTeX? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
 &lt;p&gt;Below are three steps to highlight changes made in a paper revision with LaTeX.&lt;/p&gt;
 &lt;h2 id=&quot;step-1-generate-a-submission-snapshot&quot; tabindex=&quot;-1&quot;&gt;Step 1. Generate a submission snapshot &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;We first take a snapshot of the last version of the LaTeX project before the paper&#39;s original submission. If you use Git to version control your project, it is easy to checkout the exact version used for the original submission.&lt;/p&gt;
@@ -66,7 +66,7 @@ latexpand --empty-comments f01-main.tex &lt;span class=&quot;token operator&quot
 &lt;p&gt;&lt;strong&gt;File 2:&lt;/strong&gt; &lt;code&gt;diff-config.cfg&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This file tells &lt;code&gt;latexdiff&lt;/code&gt; to show the deleted image in the original scale.&lt;/p&gt;
 &lt;pre class=&quot;language-bash&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-bash&quot;&gt;&lt;span class=&quot;token assign-left variable&quot;&gt;SCALEDELGRAPHICS&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;File 3:&lt;/strong&gt; &lt;code&gt;diff-config.cfg&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;File 3:&lt;/strong&gt; &lt;code&gt;diff-safecomp.cfg&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This file tells &lt;code&gt;latexdiff&lt;/code&gt; what are the &amp;quot;safe commands&amp;quot; that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, &lt;code&gt;myquote&lt;/code&gt; is a macro of &lt;code&gt;&#92;newcommand*&#92;myquote[1]{``&#92;textit{#1}&#39;&#39;}&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&quot;language-text&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;myquote
 multirow&lt;/code&gt;&lt;/pre&gt;
