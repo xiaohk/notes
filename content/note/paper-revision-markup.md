@@ -1,5 +1,5 @@
 ---
-title: How to Mark Up Paper Revisions with LaTeX
+title: How to Mark Up Paper Revisions with LaTeX?
 description: Tips on preparing paper revision with latex
 date: 2023-11-27
 tags:
@@ -9,7 +9,7 @@ tags:
 ---
 {% raw %}
 
-# How to Mark Up Paper Revisions with LaTeX
+# How to Mark Up Paper Revisions with LaTeX?
 
 Below are three steps to highlight changes made in a paper revision with LaTeX.
 
@@ -78,7 +78,7 @@ This file tells `latexdiff` to show the deleted image in the original scale.
 SCALEDELGRAPHICS=1
 ```
 
-**File 3:** `diff-config.cfg`
+**File 3:** `diff-safecomp.cfg`
 
 This file tells `latexdiff` what are the "safe commands" that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, `myquote` is a macro of `\newcommand*\myquote[1]{``\textit{#1}''}`.
 
