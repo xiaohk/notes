@@ -96,7 +96,7 @@ bibtex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
 pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;
 pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;h2 id=&quot;bonus&quot; tabindex=&quot;-1&quot;&gt;Bonus &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/paper-revision-markup.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;I also like to use &lt;code&gt;&#92;usepackage{todonotes}&lt;/code&gt; to highlight specific reviewer comments next to my changes. To do that, I only need to add &lt;code&gt;&#92;todo{}&lt;/code&gt; in your new LaTeX files.&lt;/p&gt;
+&lt;p&gt;I also like to use &lt;code&gt;&#92;usepackage{todonotes}&lt;/code&gt; to highlight specific reviewer comments next to my changes. To do that, you only need to add &lt;code&gt;&#92;todo{}&lt;/code&gt; in your new LaTeX files.&lt;/p&gt;
 &lt;p&gt;For example, below is an example of the marked-up revision for our CHI&#39;23 paper &lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;GAM Coach&lt;/a&gt; using &lt;code&gt;latexdiff&lt;/code&gt; and &lt;code&gt;todonotes&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;&lt;img src=&quot;https://i.imgur.com/FeDTn7c.png&quot; width=&quot;100%&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 </content>
