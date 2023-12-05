@@ -7,8 +7,8 @@ tags:
   - writing
   - research
 ---
-{% raw %}
 
+{% raw %}
 
 # How To Make ACM TAPS Happy?
 
@@ -84,7 +84,7 @@ TAPS breaks when you have any `\phantomsection`. If you really want to use it, w
 
 TAPS would suggest you wrapping the entire document inside the CJK UTF8 environment.
 
-For example, instead of applying CJK* locally like:
+For example, instead of applying CJK\* locally like:
 
 ```latex
 The translation is \begin{CJK*}{UTF8}{gbsn}``你好''\end{CJK*}.

@@ -7,6 +7,7 @@ tags:
   - writing
   - research
 ---
+
 {% raw %}
 
 # How to Submit Papers to arXiv?
@@ -44,7 +45,7 @@ tar czvf arxiv.tar.gz ./*
 1. The "deadlines" of arXiv submission
 
 | Submissions received between (all times Eastern US) | Will be announced (all times Eastern US) | Mailed to subscribers              |
-|-----------------------------------------------------|------------------------------------------|------------------------------------|
+| --------------------------------------------------- | ---------------------------------------- | ---------------------------------- |
 | Monday 14:00 – Tuesday 14:00                        | Tuesday 20:00                            | Tuesday night / Wednesday morning  |
 | Tuesday 14:00 – Wednesday 14:00                     | Wednesday 20:00                          | Wednesday night / Thursday morning |
 | Wednesday 14:00 – Thursday 14:00                    | Thursday 20:00                           | Thursday night / Friday morning    |
@@ -58,8 +59,8 @@ tar czvf arxiv.tar.gz ./*
 
 1. ⚠️ `latexpand --empty-comments` does not remove comments in `\begin{comment}\end{comment}`. If you write comments other than the native way `%`, you can use [arxiv-latex-cleaner](https://github.com/google-research/arxiv-latex-cleaner) to clean comments.
 2. Check out the [checklist for arXiv submission from Overleaf](https://www.overleaf.com/learn/how-to/LaTeX_checklist_for_arXiv_submissions) (Thanks [@bhoov](https://github.com/bhoov))
-2. Remember to keep your primary `.tex` file in the root level of the repository
-3. `natbib` in an unsorted number style does not work on ArXiv. Solution: remove `natbib` as a dependency, use `\bibliographystyle{unsrt}` instead of `\bibliographystyle{unsrtnat}`
+3. Remember to keep your primary `.tex` file in the root level of the repository
+4. `natbib` in an unsorted number style does not work on ArXiv. Solution: remove `natbib` as a dependency, use `\bibliographystyle{unsrt}` instead of `\bibliographystyle{unsrtnat}`
 
 ## Best Practices
 

@@ -7,6 +7,7 @@ tags:
   - writing
   - research
 ---
+
 {% raw %}
 
 # How to Mark Up Paper Revisions with LaTeX?
@@ -80,7 +81,7 @@ SCALEDELGRAPHICS=1
 
 **File 3:** `diff-safecomp.cfg`
 
-This file tells `latexdiff` what are the "safe commands" that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, `myquote` is a macro of `\newcommand*\myquote[1]{``\textit{#1}''}`.
+This file tells `latexdiff` what are the "safe commands" that it can check textual differences. If you define any macros that wrap some text, you can put it in the list below. For example, `myquote` is a macro of ` \newcommand*\myquote[1]{``\textit{#1}''} `.
 
 ```text
 myquote
@@ -121,13 +122,10 @@ pdflatex diff
 
 ## Bonus
 
-I also like to use `\usepackage{todonotes}` to highlight specific reviewer comments next to my changes. To do that, I only need to add `\todo{}` in your new LaTeX files.
+I also like to use `\usepackage{todonotes}` to highlight specific reviewer comments next to my changes. To do that, you only need to add `\todo{}` in your new LaTeX files.
 
 For example, below is an example of the marked-up revision for our CHI'23 paper [GAM Coach](https://dl.acm.org/doi/10.1145/3544548.3580816) using `latexdiff` and `todonotes`.
 
 [<img src="https://i.imgur.com/FeDTn7c.png" width="100%">](https://dl.acm.org/doi/10.1145/3544548.3580816)
-
-
-
 
 {% endraw %}

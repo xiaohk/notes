@@ -7,6 +7,7 @@ tags:
   - writing
   - research
 ---
+
 {% raw %}
 
 # Simple Methods to Add Page Numbers in Your CS Papers
@@ -31,6 +32,7 @@ Use `\settopmatter{printfolios=true}` right after `\documentclass`.
 \documentclass[sigconf, screen]{acmart}
 \settopmatter{printfolios=true}
 ```
+
 </td>
 </tr>
 

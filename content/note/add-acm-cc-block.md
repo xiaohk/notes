@@ -7,6 +7,7 @@ tags:
   - writing
   - research
 ---
+
 {% raw %}
 
 ## Create a CC Block for ACM Preprints
@@ -37,7 +38,6 @@ Then, you can use the `cc` copyright by adding the following code in your source
 \setcopyright{cc}
 \setcctype[4.0]{by}
 ```
-
 
 ## version < v1.87
 
