@@ -12,7 +12,9 @@ tags:
 
 # How to Mark Up Paper Revisions with LaTeX?
 
-Below are three steps to highlight changes made in a paper revision with LaTeX.
+Below are three steps to highlight changes made in a paper revision with LaTeX. After these three steps, you will have a marked-up PDF that looks like this.
+
+[<img src="https://i.imgur.com/FeDTn7c.png" width="100%">](https://dl.acm.org/doi/10.1145/3544548.3580816)
 
 ## Step 1. Generate a submission snapshot
 
