@@ -1,7 +1,7 @@
 ---
 title: How to Correctly Count Words in LaTeX?
 description: Tips on counting words in LaTeX (especially for ACM CHI submissions)
-date: 2023-11-27
+date: 2023-12-11
 tags:
   - latex
   - writing
