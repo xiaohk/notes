@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Correctly Count Words in LaTeX?</title>
+    <meta
+    name="description" content="Tips on counting words in LaTeX (especially for ACM CHI submissions)">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Jay&#39;s Notes">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Jay&#39;s Notes">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/github-markdown-light.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F2175QDTKC"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'G-F2175QDTKC');
+    </script>
+    
+
+    <style>
+      /*
+ * New diff- syntax
+ */
+
+pre[class*="language-diff-"] {
+	--eleventy-code-padding: 1.25em;
+	padding-left: var(--eleventy-code-padding);
+	padding-right: var(--eleventy-code-padding);
+}
+.token.deleted {
+	background-color: hsl(0, 51%, 37%);
+	color: inherit;
+}
+.token.inserted {
+	background-color: hsl(126, 31%, 39%);
+	color: inherit;
+}
+
+/* Make the + and - characters unselectable for copy/paste */
+.token.prefix.unchanged,
+.token.prefix.inserted,
+.token.prefix.deleted {
+	-webkit-user-select: none;
+	user-select: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.token.prefix.inserted,
+.token.prefix.deleted {
+	width: var(--eleventy-code-padding);
+	background-color: rgba(0,0,0,.2);
+}
+
+/* Optional: full-width background color */
+.token.inserted:not(.prefix),
+.token.deleted:not(.prefix) {
+	display: block;
+	margin-left: calc(-1 * var(--eleventy-code-padding));
+	margin-right: calc(-1 * var(--eleventy-code-padding));
+	text-decoration: none; /* override del, ins, mark defaults */
+	color: inherit; /* override del, ins, mark defaults */
+}
+* { box-sizing: border-box; }
+    </style>
+  </head>
+  <body>
+    <a href="#skip" class="visually-hidden">Skip to main content</a>
+
+    <header>
+      <div class="header-content">
+        <a href="/" class="home-link">Jay&#39;s Notes</a>
+        <nav>
+          <h2 class="visually-hidden">Top level navigation menu</h2>
+          <ul class="nav">
+            
+
+            <li class="nav-item">
+              <a href="https://zijie.wang">About</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="skip">
+      
+<link rel="stylesheet" href="/css/post.css">
+<link rel="stylesheet" href="/css/prism-theme-github-light.css">
+
+
+
+<div class="markdown-body">
+
+  <div class="top-bar">
+
+    <div class="post-metadata">
+
+      <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z"/>
+      </svg>
+
+      <a href="https://github.com/xiaohk/notes/tree/main/content/note/count-word-in-latex.md" class="filename">count-word-in-latex.md</a>
+
+      <div>
+        <time datetime="2023-11-27">27 November 2023</time>
+      </div>
+        <div class="tag-wrapper">
+          <a href="/tags/latex/" class="post-tag">latex</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/writing/" class="post-tag">writing</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/research/" class="post-tag">research</a>
+
+        </div>
+        <div class="tag-wrapper">
+          <a href="/tags/chi/" class="post-tag">chi</a>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <h1 id="how-to-correctly-count-words-in-latex" tabindex="-1">How to Correctly Count Words in LaTeX? <a class="header-anchor" href="#how-to-correctly-count-words-in-latex">#</a></h1>
+<p>Some venues like ACM CHI have started to impose a word limit for paper submissions. We can use the <code>texcount</code> package to count words in LaTeX. Overleaf also uses this package, so this note applies to Overleaf users as well.</p>
+<p>To use <code>texcount</code>, run the following command in the terminal. By default, <code>texcount</code> excludes captions of tables and figures and bibliography. <code>-inc</code> parses all included files. <code>-total</code> reports the total word count instead of word count per file.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex">texcount f01-main.tex -inc -total</code></pre>
+<p>Below are some tips to avoid over-counting the words in LaTeX.</p>
+<h2 id="tip-1-avoid-counting-words-in-custom-macros" tabindex="-1">Tip 1: Avoid Counting Words in Custom Macros <a class="header-anchor" href="#tip-1-avoid-counting-words-in-custom-macros">#</a></h2>
+<p>By default, <code>textcount</code> counts words in all custom macros. However, some macros do not render text into the PDF, and their content should not be counted. An example is the <code>Description{}</code> macro from the <a href="https://ctan.org/pkg/acmart?lang=en"><code>acmart</code></a> template. Authors are required to use this macro to provide alt text for figures and tables, and the alt text is not shown in the generated PDF. To escape this macro, add the following comment in the main LaTeX file.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">%TC:macro \Description [ignore]</span></code></pre>
+<h2 id="tip-2-escape-preambles" tabindex="-1">Tip 2: Escape Preambles <a class="header-anchor" href="#tip-2-escape-preambles">#</a></h2>
+<p>Many LaTeX projects include a long preamble file that defines new macros and configures packages. By default, <code>textcount</code> counts words from preambles. To escape preambles, add the following comment in the main LaTeX file.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">%TC:ignore</span>
+<span class="token function selector">\input</span><span class="token punctuation">{</span>f00-preamble<span class="token punctuation">}</span>
+<span class="token comment">%TC:endignore</span></code></pre>
+<h2 id="tip-3-escape-non-rendering-and-appendix-sections" tabindex="-1">Tip 3: Escape Non-rendering and Appendix Sections <a class="header-anchor" href="#tip-3-escape-non-rendering-and-appendix-sections">#</a></h2>
+<p>Some sections are not rendered in the PDF, such as the acknowledgment section during the submission stage <code>\begin{acks}</code> and the appendix sections <code>\appendix</code>. To escape these sections, just put the <code>%TC:ignore</code> comments surrounding these sections.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">%TC:ignore</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">acks</span><span class="token punctuation">}</span>
+  This work was supported by xxx.
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">acks</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\appendix</span>
+<span class="token function selector">\input</span><span class="token punctuation">{</span>f12-appendix.tex<span class="token punctuation">}</span>
+<span class="token comment">%TC:endignore</span></code></pre>
+
+  </div>
+</div>
+
+    <ul class="links-nextprev">
+        <li>Previous:
+            <a href="/add-paper-page-num.html">Simple Methods to Add Page Numbers in Your CS Papers</a>
+        </li>
+      
+        <li>Next:
+            <a href="/paper-revision-markup.html">How to Mark Up Paper Revisions with LaTeX?</a>
+        </li>
+      
+    </ul>
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /count-word-in-latex.html -->
+  </body>
+</html>
