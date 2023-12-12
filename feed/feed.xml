@@ -4,12 +4,43 @@
 	<subtitle>Notes about research, technology, and AI.</subtitle>
 	<link href="https://notes.zijie.wang/feed/feed.xml" rel="self"/>
 	<link href="https://notes.zijie.wang/"/>
-	<updated>2023-11-27T00:00:00Z</updated>
+	<updated>2023-12-11T00:00:00Z</updated>
 	<id>https://notes.zijie.wang/</id>
 	<author>
 		<name>Jay Wang</name>
 		<email>jay@zijie.wang</email>
 	</author>
+	
+	<entry>
+		<title>How to Correctly Count Words in LaTeX?</title>
+		<link href="https://notes.zijie.wang/count-word-in-latex.html"/>
+		<updated>2023-12-11T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/count-word-in-latex.html</id>
+		<content type="html">&lt;h1 id=&quot;how-to-correctly-count-words-in-latex&quot; tabindex=&quot;-1&quot;&gt;How to Correctly Count Words in LaTeX? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;Some venues like ACM CHI have started to impose a word limit for paper submissions. We can use the &lt;code&gt;texcount&lt;/code&gt; package to count words in LaTeX. Overleaf also uses this package, so this note applies to Overleaf users as well.&lt;/p&gt;
+&lt;p&gt;To use &lt;code&gt;texcount&lt;/code&gt;, run the following command in the terminal. By default, &lt;code&gt;texcount&lt;/code&gt; excludes captions of tables and figures and bibliography. &lt;code&gt;-inc&lt;/code&gt; parses all included files. &lt;code&gt;-total&lt;/code&gt; reports the total word count instead of word count per file.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;texcount f01-main.tex -inc -total&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Below are some tips to avoid over-counting the words in LaTeX.&lt;/p&gt;
+&lt;h2 id=&quot;tip-1-avoid-counting-words-in-custom-macros&quot; tabindex=&quot;-1&quot;&gt;Tip 1: Avoid Counting Words in Custom Macros &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;By default, &lt;code&gt;textcount&lt;/code&gt; counts words in all custom macros. However, some macros do not render text into the PDF, and their content should not be counted. An example is the &lt;code&gt;Description{}&lt;/code&gt; macro from the &lt;a href=&quot;https://ctan.org/pkg/acmart?lang=en&quot;&gt;&lt;code&gt;acmart&lt;/code&gt;&lt;/a&gt; template. Authors are required to use this macro to provide alt text for figures and tables, and the alt text is not shown in the generated PDF. To escape this macro, add the following comment in the main LaTeX file.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:macro &#92;Description [ignore]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;tip-2-escape-preambles&quot; tabindex=&quot;-1&quot;&gt;Tip 2: Escape Preambles &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Many LaTeX projects include a long preamble file that defines new macros and configures packages. By default, &lt;code&gt;textcount&lt;/code&gt; counts words from preambles. To escape preambles, add the following comment in the main LaTeX file.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:ignore&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;f00-preamble&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%TC:endignore&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;tip-3-escape-non-rendering-and-appendix-sections&quot; tabindex=&quot;-1&quot;&gt;Tip 3: Escape Non-rendering and Appendix Sections &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Some sections are not rendered in the PDF, such as the acknowledgment section during the submission stage &lt;code&gt;&#92;begin{acks}&lt;/code&gt; and the appendix sections &lt;code&gt;&#92;appendix&lt;/code&gt;. To escape these sections, just put the &lt;code&gt;%TC:ignore&lt;/code&gt; comments surrounding these sections.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:ignore&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;acks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  This work was supported by xxx.
+&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;acks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token function selector&quot;&gt;&#92;appendix&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;f12-appendix.tex&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token comment&quot;&gt;%TC:endignore&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>How to Mark Up Paper Revisions with LaTeX?</title>
@@ -100,37 +131,6 @@ pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;&lt;/code
 &lt;p&gt;I also like to use &lt;code&gt;&#92;usepackage{todonotes}&lt;/code&gt; to highlight specific reviewer comments next to my changes. To do that, you only need to add &lt;code&gt;&#92;todo{}&lt;/code&gt; in your new LaTeX files.&lt;/p&gt;
 &lt;p&gt;For example, below is an example of the marked-up revision for our CHI&#39;23 paper &lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;GAM Coach&lt;/a&gt; using &lt;code&gt;latexdiff&lt;/code&gt; and &lt;code&gt;todonotes&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://dl.acm.org/doi/10.1145/3544548.3580816&quot;&gt;&lt;img src=&quot;https://i.imgur.com/FeDTn7c.png&quot; width=&quot;100%&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-</content>
-	</entry>
-	
-	<entry>
-		<title>How to Correctly Count Words in LaTeX?</title>
-		<link href="https://notes.zijie.wang/count-word-in-latex.html"/>
-		<updated>2023-11-27T00:00:00Z</updated>
-		<id>https://notes.zijie.wang/count-word-in-latex.html</id>
-		<content type="html">&lt;h1 id=&quot;how-to-correctly-count-words-in-latex&quot; tabindex=&quot;-1&quot;&gt;How to Correctly Count Words in LaTeX? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
-&lt;p&gt;Some venues like ACM CHI have started to impose a word limit for paper submissions. We can use the &lt;code&gt;texcount&lt;/code&gt; package to count words in LaTeX. Overleaf also uses this package, so this note applies to Overleaf users as well.&lt;/p&gt;
-&lt;p&gt;To use &lt;code&gt;texcount&lt;/code&gt;, run the following command in the terminal. By default, &lt;code&gt;texcount&lt;/code&gt; excludes captions of tables and figures and bibliography. &lt;code&gt;-inc&lt;/code&gt; parses all included files. &lt;code&gt;-total&lt;/code&gt; reports the total word count instead of word count per file.&lt;/p&gt;
-&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;texcount f01-main.tex -inc -total&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Below are some tips to avoid over-counting the words in LaTeX.&lt;/p&gt;
-&lt;h2 id=&quot;tip-1-avoid-counting-words-in-custom-macros&quot; tabindex=&quot;-1&quot;&gt;Tip 1: Avoid Counting Words in Custom Macros &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;By default, &lt;code&gt;textcount&lt;/code&gt; counts words in all custom macros. However, some macros do not render text into the PDF, and their content should not be counted. An example is the &lt;code&gt;Description{}&lt;/code&gt; macro from the &lt;a href=&quot;https://ctan.org/pkg/acmart?lang=en&quot;&gt;&lt;code&gt;acmart&lt;/code&gt;&lt;/a&gt; template. Authors are required to use this macro to provide alt text for figures and tables, and the alt text is not shown in the generated PDF. To escape this macro, add the following comment in the main LaTeX file.&lt;/p&gt;
-&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:macro &#92;Description [ignore]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;tip-2-escape-preambles&quot; tabindex=&quot;-1&quot;&gt;Tip 2: Escape Preambles &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Many LaTeX projects include a long preamble file that defines new macros and configures packages. By default, &lt;code&gt;textcount&lt;/code&gt; counts words from preambles. To escape preambles, add the following comment in the main LaTeX file.&lt;/p&gt;
-&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:ignore&lt;/span&gt;
-&lt;span class=&quot;token function selector&quot;&gt;&#92;input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;f00-preamble&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%TC:endignore&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;h2 id=&quot;tip-3-escape-non-rendering-and-appendix-sections&quot; tabindex=&quot;-1&quot;&gt;Tip 3: Escape Non-rendering and Appendix Sections &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/count-word-in-latex.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;Some sections are not rendered in the PDF, such as the acknowledgment section during the submission stage &lt;code&gt;&#92;begin{acks}&lt;/code&gt; and the appendix sections &lt;code&gt;&#92;appendix&lt;/code&gt;. To escape these sections, just put the &lt;code&gt;%TC:ignore&lt;/code&gt; comments surrounding these sections.&lt;/p&gt;
-&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;%TC:ignore&lt;/span&gt;
-&lt;span class=&quot;token function selector&quot;&gt;&#92;begin&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;acks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-  This work was supported by xxx.
-&lt;span class=&quot;token function selector&quot;&gt;&#92;end&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;acks&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;token function selector&quot;&gt;&#92;appendix&lt;/span&gt;
-&lt;span class=&quot;token function selector&quot;&gt;&#92;input&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;f12-appendix.tex&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%TC:endignore&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 </content>
 	</entry>
 	
