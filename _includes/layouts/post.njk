@@ -6,6 +6,18 @@ permalink: "{{ page.inputPath | getBasenameWithoutExtension }}.html"
 <link rel="stylesheet" href="/css/post.css">
 <link rel="stylesheet" href="/css/prism-theme-github-light.css">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F2175QDTKC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-F2175QDTKC');
+</script>
+
 {# Only include the syntax highlighter CSS on blog posts #}
 {%- css %}{% include "public/css/prism-diff.css" %}{%- endcss %}
 
