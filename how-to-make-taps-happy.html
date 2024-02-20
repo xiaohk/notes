@@ -146,14 +146,14 @@ pre[class*="language-diff-"] {
 <p>Here are some tips and tricks to make ACM TAPS stop complaining about your LaTeX source submission.</p>
 <h3 id="1-only-use-acm-permitted-packages" tabindex="-1">1. Only use ACM permitted packages <a class="header-anchor" href="#1-only-use-acm-permitted-packages">#</a></h3>
 <p>Remove all packages that are not listed in this <a href="https://authors.acm.org/proceedings/production-information/accepted-latex-packages">webpage</a>.</p>
-<h3 id="2-add-short-description-for-caption-commands" tabindex="-1">2. Add short description for <code>\caption</code> commands <a class="header-anchor" href="#2-add-short-description-for-caption-commands">#</a></h3>
-<p>For example, change <code>\caption{This is a figure...}</code> to <code>\caption[]{This is a figure...}</code> in your figures and tables.</p>
+<h3 id="2-add-short-description-for-caption-commands" tabindex="-1"><s>2. Add short description for <code>\caption</code> commands</s> <a class="header-anchor" href="#2-add-short-description-for-caption-commands">#</a></h3>
+<p><s>For example, change <code>\caption{This is a figure...}</code> to <code>\caption[]{This is a figure...}</code> in your figures and tables.</s></p>
 <h3 id="3-remove-in-file-references" tabindex="-1">3. Remove <code>./</code> in file references <a class="header-anchor" href="#3-remove-in-file-references">#</a></h3>
 <p>Refer to figure files without <code>./</code>. Change <code>\includegraphics[width=\linewidth]{./figures/dog.pdf}</code> to <code>\includegraphics[width=\linewidth]{figures/dog.pdf}</code> in figure environments.</p>
 <h3 id="4-do-not-use-self-defined-macros-in-equations" tabindex="-1">4. Do not use self-defined macros in equations <a class="header-anchor" href="#4-do-not-use-self-defined-macros-in-equations">#</a></h3>
 <p>For example, change <code>$\mcolor{myred}{x}$</code> to <code>$\textcolor[HTML]{E03177}{x}$</code>.</p>
 <h3 id="5-use-aptltox-to-have-different-latex-code-for-different-targets-pdf-and-html" tabindex="-1">5. Use <code>\aptLtoX{}</code> to have different LaTeX code for different targets (PDF and HTML) <a class="header-anchor" href="#5-use-aptltox-to-have-different-latex-code-for-different-targets-pdf-and-html">#</a></h3>
-<p>First add the below <code>acmart-taps.sty</code> file in your source directory:</p>
+<p>Step 1. Add the below <code>acmart-taps.sty</code> file in your source directory:</p>
 <pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% "acmart-taps.sty"</span>
 <span class="token comment">% This is a patch file for acmart class file</span>
 <span class="token comment">% Develop by Ranjan</span>
@@ -177,7 +177,9 @@ pre[class*="language-diff-"] {
 <span class="token function selector">\makeatother</span>
 
 <span class="token function selector">\endinput</span></code></pre>
-<p>Then you can use <code>aptLtoXdel</code> in your LaTeX code when you want to write different code to generate PDF and HTML files. For example, if you only want to change underline color in PDF, you can wraps <code>\setulcolor{gray}</code> as below:</p>
+<p>Step 2. Refer to it in your preamble:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\usepackage</span><span class="token punctuation">{</span><span class="token keyword">acmart-taps</span><span class="token punctuation">}</span></code></pre>
+<p>Step 3. You can now use <code>aptLtoXdel</code> in your LaTeX code when you want to write different code to generate PDF and HTML files. For example, if you only want to change underline color in PDF, you can wraps <code>\setulcolor{gray}</code> as below:</p>
 <pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\aptLtoX</span><span class="token punctuation">[</span>graphic=no, type=html<span class="token punctuation">]</span><span class="token punctuation">{</span>
   <span class="token comment">% LaTeX for HTML target</span>
   <span class="token comment">% Pass</span>
@@ -241,10 +243,39 @@ pre[class*="language-diff-"] {
 <p>You can also not use <code>aligned</code> inside an <code>align</code> environment to create multi-line rows. A workaround is to use <code>\nonumber</code> in these multi-line rows directly.</p>
 <h3 id="11-email-taps-to-cancel-a-submission" tabindex="-1">11. Email TAPS to cancel a submission <a class="header-anchor" href="#11-email-taps-to-cancel-a-submission">#</a></h3>
 <p>It usually takes about 4–6 days for TAPS team to debug your failed submissions. If you want to debug yourself (e.g., trying out different workarounds), you can email the TAPS support team to withdraw your failed submission so that you can resubmit again. It only takes about 1–3 hours for TAPS to re-open the submission for you.</p>
+<h3 id="12-avoid-defining-a-macro-named-link" tabindex="-1">12. Avoid defining a macro named <code>link{}</code> <a class="header-anchor" href="#12-avoid-defining-a-macro-named-link">#</a></h3>
+<p>It seems there is some internal conflict for the macro name <code>link{}</code> when used in footers. You can simply rename it to <code>mylink{}</code>.</p>
+<h3 id="13-avoid-defining-macros-that-include-includegraphics" tabindex="-1">13. Avoid defining macros that include <code>includegraphics{}</code> <a class="header-anchor" href="#13-avoid-defining-macros-that-include-includegraphics">#</a></h3>
+<p>TAPS wants the content to expose any <code>includegraphics{}</code> in the main text instead of through macros. For example:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex">
+<span class="token comment">% BAD</span>
+<span class="token function selector">\newcommand*</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\begingroup</span><span class="token function selector">\setbox</span>0=<span class="token function selector">\hbox</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token function selector">\parbox</span><span class="token punctuation">{</span><span class="token function selector">\wd</span>0<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\box</span>0<span class="token punctuation">}</span><span class="token function selector">\endgroup</span><span class="token punctuation">}</span>
+<span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\inlinefig</span><span class="token punctuation">}</span><span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">{</span><span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>height=#1pt<span class="token punctuation">]</span><span class="token punctuation">{</span>figures/#2<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\inlinefig</span><span class="token punctuation">{</span>9<span class="token punctuation">}</span><span class="token punctuation">{</span>my-fig.pdf<span class="token punctuation">}</span>
+
+<span class="token comment">% OK</span>
+<span class="token function selector">\newcommand*</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\begingroup</span><span class="token function selector">\setbox</span>0=<span class="token function selector">\hbox</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token function selector">\parbox</span><span class="token punctuation">{</span><span class="token function selector">\wd</span>0<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\box</span>0<span class="token punctuation">}</span><span class="token function selector">\endgroup</span><span class="token punctuation">}</span>
+
+<span class="token function selector">\vcenteredhbox</span><span class="token punctuation">{</span><span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>height=9pt<span class="token punctuation">]</span><span class="token punctuation">{</span>figures/my-fig.pdf<span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>
+<h3 id="14-taps-doesn-t-support-xlabel" tabindex="-1">14. TAPS doesn't support <code>\xlabel</code> <a class="header-anchor" href="#14-taps-doesn-t-support-xlabel">#</a></h3>
+<p>If you use <code>\xlabel</code>, wrap it and its references in <code>\aptLtoX</code>.</p>
+<h3 id="15-taps-doesn-t-support-underline-configuration-from-soul" tabindex="-1">15. TAPS doesn't support underline configuration from <code>soul</code> <a class="header-anchor" href="#15-taps-doesn-t-support-underline-configuration-from-soul">#</a></h3>
+<p>If you are setting the underline color and spacing, wrap them in <code>aptLtoX</code>. For example:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\aptLtoX</span><span class="token punctuation">[</span>graphic=no, type=html<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span>
+  <span class="token function selector">\setulcolor</span><span class="token punctuation">{</span>grayIII<span class="token punctuation">}</span>
+  <span class="token function selector">\setul</span><span class="token punctuation">{</span>0.45ex<span class="token punctuation">}</span><span class="token punctuation">{</span>0.7pt<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h3 id="16-taps-doesn-t-render-underline-in-html" tabindex="-1">16. TAPS doesn't render underline in HTML <a class="header-anchor" href="#16-taps-doesn-t-render-underline-in-html">#</a></h3>
+<p>Your <code>\ul{}</code> underline will disappear in the HTML version. If you want them to stay in HTML, one way is to replace them with images by using the below command:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">imageonly</span><span class="token punctuation">}</span><span class="token function selector">\ul</span><span class="token punctuation">{</span>my text<span class="token punctuation">}</span><span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">imageonly</span><span class="token punctuation">}</span></code></pre>
+<h3 id="17-taps-doesn-t-support-arrayrulecolor" tabindex="-1">17. TAPS doesn't support <code>arrayrulecolor</code> <a class="header-anchor" href="#17-taps-doesn-t-support-arrayrulecolor">#</a></h3>
+<p>If you are using <code>arrayrulecolor</code> to change the cell's border color in a table, wrap the whole table in <code>aptLtoX</code> and do not set the border color in the HTML block.</p>
 <hr>
 <h3 id="finally-watch-out-for-hidden-errors-in-the-generated-html-file" tabindex="-1">Finally, watch out for hidden errors in the generated HTML file <a class="header-anchor" href="#finally-watch-out-for-hidden-errors-in-the-generated-html-file">#</a></h3>
 <p>Congratulations on making it this far! 🎉 Following all these steps, it's highly likely that TAPS can now successfully generate an HTML version of your paper. However, be aware that TAPS may have also introduced some &quot;hidden&quot; HTML-specific errors. Therefore, it's a good idea to skim through the HTML file to catch these errors.</p>
 <p>For instance, if you've used <code>hspace{10px}</code> in your equation, there may be some random <code>px</code> present in your equation within the HTML file. To resolve these issues, you will need to adjust your LaTeX code accordingly (e.g., use <code>\quad</code> instead of <code>hspace{10px}</code>).</p>
+<h6>Last updated: 2/20/2024</h6>
 
   </div>
 </div>
