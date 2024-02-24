@@ -33,7 +33,7 @@ jobs:
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -u "github-actions <action@github.com>" -m "Deploy $(git log '--format=format:%H' main -1)" -d ./_site
+          npx gh-pages -t -u "github-actions <action@github.com>" -m "Deploy $(git log '--format=format:%H' main -1)" -d ./_site
         if: ${{ github.ref == 'refs/heads/main' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
