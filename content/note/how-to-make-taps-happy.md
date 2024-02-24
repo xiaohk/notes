@@ -88,7 +88,7 @@ TAPS breaks when you have any `\phantomsection`. If you really want to use it, w
 
 ### 8. Wrap everything in `CJK*` if you have Chinese/Japanese/Korean characters
 
-TAPS would suggest you wrapping the entire document inside the CJK UTF8 environment.
+TAPS would suggest you wrap the entire document inside the CJK UTF8 environment.
 
 For example, instead of applying CJK\* locally like:
 

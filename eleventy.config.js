@@ -6,9 +6,11 @@ const pluginSyntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const pluginBundle = require('@11ty/eleventy-plugin-bundle');
 const pluginNavigation = require('@11ty/eleventy-navigation');
 const { EleventyHtmlBasePlugin } = require('@11ty/eleventy');
+const EleventyPluginOgImage = require('eleventy-plugin-og-image');
 
 const pluginDrafts = require('./eleventy.config.drafts.js');
 const pluginImages = require('./eleventy.config.images.js');
+const fs = require('fs');
 
 module.exports = function (eleventyConfig) {
   // Copy the contents of the `public` folder to the output folder
@@ -25,6 +27,30 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.setServerOptions({
     watch: ['public/**/*.css']
+  });
+
+  // Open graph generator
+  eleventyConfig.addPlugin(EleventyPluginOgImage, {
+    satoriOptions: {
+      fonts: [
+        {
+          name: 'Inter',
+          data: fs.readFileSync(
+            'node_modules/@fontsource/inter/files/inter-latin-800-normal.woff'
+          ),
+          weight: 800,
+          style: 'normal'
+        },
+        {
+          name: 'Inter',
+          data: fs.readFileSync(
+            'node_modules/@fontsource/inter/files/inter-latin-400-normal.woff'
+          ),
+          weight: 400,
+          style: 'normal'
+        }
+      ]
+    }
   });
 
   // App plugins

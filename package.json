@@ -31,6 +31,8 @@
     "@11ty/eleventy-plugin-bundle": "^1.0.4",
     "@11ty/eleventy-plugin-rss": "^1.2.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
+    "@fontsource/inter": "^5.0.16",
+    "eleventy-plugin-og-image": "^2.1.1",
     "gh-pages": "^6.1.0",
     "luxon": "^3.3.0",
     "markdown-it-anchor": "^8.6.7",

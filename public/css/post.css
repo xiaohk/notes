@@ -28,13 +28,6 @@
     margin: 0;
     font-size: 0.85rem;
 
-    .edit-icon {
-      position: relative;
-      width: 1em;
-      height: 1em;
-      fill: var(--gray-600);
-    }
-
     & time {
       margin-left: 12px;
       margin-right: 12px;
@@ -51,6 +44,19 @@
       border-radius: 6px;
     }
   }
+}
+
+.splitter {
+  margin-top: 24px;
+  margin-bottom: 6px;
+  border-top: 1px solid #d0d7de;
+}
+
+.edit-icon {
+  position: relative;
+  width: 1em;
+  height: 1em;
+  fill: var(--gray-600);
 }
 
 .content {
