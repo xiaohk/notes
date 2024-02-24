@@ -98,7 +98,7 @@ The translation is \begin{CJK*}{UTF8}{gbsn}``你好''\end{CJK*}.
 
 You can wrap the LaTeX document in `CJK*`:
 
-```\latex
+```latex
 \begin{document}
 \begin{CJK*}{UTF8}{gkai}
 
@@ -164,31 +164,36 @@ You can also not use `aligned` inside an `align` environment to create multi-lin
 
 It usually takes about 4–6 days for TAPS team to debug your failed submissions. If you want to debug yourself (e.g., trying out different workarounds), you can email the TAPS support team to withdraw your failed submission so that you can resubmit again. It only takes about 1–3 hours for TAPS to re-open the submission for you.
 
-### 12. Avoid defining a macro named `link{}`
+### 12. Avoid defining a macro named `\link{}`
 
-It seems there is some internal conflict for the macro name `link{}` when used in footers. You can simply rename it to `mylink{}`.
+There is some internal conflict for the macro name `\link{}` when used in footers. You can simply rename `\link{}` to `\mylink{}`.
 
-### 13. Avoid defining macros that include `includegraphics{}`
+### 13. Avoid wrapping `\includegraphics{}` in macros
 
-TAPS wants the content to expose any `includegraphics{}` in the main text instead of through macros. For example:
+TAPS wants the Tex code to directly expose any `\includegraphics{}` commands instead of hiding it in macros. For example:
 
 ```latex
+% ==== BAD ====
 
-% BAD
+% Preamble file
 \newcommand*{\vcenteredhbox}[1]{\begingroup\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
 \newcommand{\inlinefig}[2]{\vcenteredhbox{\includegraphics[height=#1pt]{figures/#2}}}
 
+% Tex file
 \inlinefig{9}{my-fig.pdf}
 
-% OK
+% ==== OK ====
+
+% Preamble file
 \newcommand*{\vcenteredhbox}[1]{\begingroup\setbox0=\hbox{#1}\parbox{\wd0}{\box0}\endgroup}
 
+% Tex file
 \vcenteredhbox{\includegraphics[height=9pt]{figures/my-fig.pdf}}
 ```
 
-### 14. TAPS doesn't support `\xlabel`
+### 14. TAPS doesn't support `\xlabel{}`
 
-If you use `\xlabel`, wrap it and its references in `\aptLtoX`.
+If you use `\xlabel{}`, wrap it and its references in `\aptLtoX`.
 
 ### 15. TAPS doesn't support underline configuration from `soul`
 
