@@ -201,13 +201,13 @@ pre[class*="language-diff-"] {
 <p>For example, instead of applying CJK* locally like:</p>
 <pre class="language-latex" tabindex="0"><code class="language-latex">The translation is <span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span><span class="token punctuation">{</span>UTF8<span class="token punctuation">}</span><span class="token punctuation">{</span>gbsn<span class="token punctuation">}</span>``你好''<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span>.</code></pre>
 <p>You can wrap the LaTeX document in <code>CJK*</code>:</p>
-<pre class="language-\latex" tabindex="0"><code class="language-\latex">\begin{document}
-\begin{CJK*}{UTF8}{gkai}
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span>
+<span class="token function selector">\begin</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span><span class="token punctuation">{</span>UTF8<span class="token punctuation">}</span><span class="token punctuation">{</span>gkai<span class="token punctuation">}</span>
 
-% xxx
+<span class="token comment">% xxx</span>
 
-\end{CJK*}
-\end{document}</code></pre>
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">CJK*</span><span class="token punctuation">}</span>
+<span class="token function selector">\end</span><span class="token punctuation">{</span><span class="token keyword">document</span><span class="token punctuation">}</span></code></pre>
 <p>Also, TAPS is unhappy with CJK characters in the <code>\Description{}</code> command. They would suggest you to comment out the <code>\Description{}</code> with CJK characters.</p>
 <h3 id="9-taps-doesn-t-like-enumitem" tabindex="-1">9. TAPS doesn't like <code>enumitem</code> <a class="header-anchor" href="#9-taps-doesn-t-like-enumitem">#</a></h3>
 <p>Wrap your <code>enumitem</code> lists (e.g., <code>itemize</code> and <code>enumerate</code>) in <code>\aptLtoX</code>.</p>
@@ -248,23 +248,28 @@ pre[class*="language-diff-"] {
 <p>You can also not use <code>aligned</code> inside an <code>align</code> environment to create multi-line rows. A workaround is to use <code>\nonumber</code> in these multi-line rows directly.</p>
 <h3 id="11-email-taps-to-cancel-a-submission" tabindex="-1">11. Email TAPS to cancel a submission <a class="header-anchor" href="#11-email-taps-to-cancel-a-submission">#</a></h3>
 <p>It usually takes about 4–6 days for TAPS team to debug your failed submissions. If you want to debug yourself (e.g., trying out different workarounds), you can email the TAPS support team to withdraw your failed submission so that you can resubmit again. It only takes about 1–3 hours for TAPS to re-open the submission for you.</p>
-<h3 id="12-avoid-defining-a-macro-named-link" tabindex="-1">12. Avoid defining a macro named <code>link{}</code> <a class="header-anchor" href="#12-avoid-defining-a-macro-named-link">#</a></h3>
-<p>It seems there is some internal conflict for the macro name <code>link{}</code> when used in footers. You can simply rename it to <code>mylink{}</code>.</p>
-<h3 id="13-avoid-defining-macros-that-include-includegraphics" tabindex="-1">13. Avoid defining macros that include <code>includegraphics{}</code> <a class="header-anchor" href="#13-avoid-defining-macros-that-include-includegraphics">#</a></h3>
-<p>TAPS wants the content to expose any <code>includegraphics{}</code> in the main text instead of through macros. For example:</p>
-<pre class="language-latex" tabindex="0"><code class="language-latex">
-<span class="token comment">% BAD</span>
+<h3 id="12-avoid-defining-a-macro-named-link" tabindex="-1">12. Avoid defining a macro named <code>\link{}</code> <a class="header-anchor" href="#12-avoid-defining-a-macro-named-link">#</a></h3>
+<p>There is some internal conflict for the macro name <code>\link{}</code> when used in footers. You can simply rename <code>\link{}</code> to <code>\mylink{}</code>.</p>
+<h3 id="13-avoid-wrapping-includegraphics-in-macros" tabindex="-1">13. Avoid wrapping <code>\includegraphics{}</code> in macros <a class="header-anchor" href="#13-avoid-wrapping-includegraphics-in-macros">#</a></h3>
+<p>TAPS wants the Tex code to directly expose any <code>\includegraphics{}</code> commands instead of hiding it in macros. For example:</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% ==== BAD ====</span>
+
+<span class="token comment">% Preamble file</span>
 <span class="token function selector">\newcommand*</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\begingroup</span><span class="token function selector">\setbox</span>0=<span class="token function selector">\hbox</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token function selector">\parbox</span><span class="token punctuation">{</span><span class="token function selector">\wd</span>0<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\box</span>0<span class="token punctuation">}</span><span class="token function selector">\endgroup</span><span class="token punctuation">}</span>
 <span class="token function selector">\newcommand</span><span class="token punctuation">{</span><span class="token function selector">\inlinefig</span><span class="token punctuation">}</span><span class="token punctuation">[</span>2<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">{</span><span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>height=#1pt<span class="token punctuation">]</span><span class="token punctuation">{</span>figures/#2<span class="token punctuation">}</span><span class="token punctuation">}</span><span class="token punctuation">}</span>
 
+<span class="token comment">% Tex file</span>
 <span class="token function selector">\inlinefig</span><span class="token punctuation">{</span>9<span class="token punctuation">}</span><span class="token punctuation">{</span>my-fig.pdf<span class="token punctuation">}</span>
 
-<span class="token comment">% OK</span>
+<span class="token comment">% ==== OK ====</span>
+
+<span class="token comment">% Preamble file</span>
 <span class="token function selector">\newcommand*</span><span class="token punctuation">{</span><span class="token function selector">\vcenteredhbox</span><span class="token punctuation">}</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token function selector">\begingroup</span><span class="token function selector">\setbox</span>0=<span class="token function selector">\hbox</span><span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token function selector">\parbox</span><span class="token punctuation">{</span><span class="token function selector">\wd</span>0<span class="token punctuation">}</span><span class="token punctuation">{</span><span class="token function selector">\box</span>0<span class="token punctuation">}</span><span class="token function selector">\endgroup</span><span class="token punctuation">}</span>
 
+<span class="token comment">% Tex file</span>
 <span class="token function selector">\vcenteredhbox</span><span class="token punctuation">{</span><span class="token function selector">\includegraphics</span><span class="token punctuation">[</span>height=9pt<span class="token punctuation">]</span><span class="token punctuation">{</span>figures/my-fig.pdf<span class="token punctuation">}</span><span class="token punctuation">}</span></code></pre>
-<h3 id="14-taps-doesn-t-support-xlabel" tabindex="-1">14. TAPS doesn't support <code>\xlabel</code> <a class="header-anchor" href="#14-taps-doesn-t-support-xlabel">#</a></h3>
-<p>If you use <code>\xlabel</code>, wrap it and its references in <code>\aptLtoX</code>.</p>
+<h3 id="14-taps-doesn-t-support-xlabel" tabindex="-1">14. TAPS doesn't support <code>\xlabel{}</code> <a class="header-anchor" href="#14-taps-doesn-t-support-xlabel">#</a></h3>
+<p>If you use <code>\xlabel{}</code>, wrap it and its references in <code>\aptLtoX</code>.</p>
 <h3 id="15-taps-doesn-t-support-underline-configuration-from-soul" tabindex="-1">15. TAPS doesn't support underline configuration from <code>soul</code> <a class="header-anchor" href="#15-taps-doesn-t-support-underline-configuration-from-soul">#</a></h3>
 <p>If you are setting the underline color and spacing, wrap them in <code>aptLtoX</code>. For example:</p>
 <pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\aptLtoX</span><span class="token punctuation">[</span>graphic=no, type=html<span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">{</span>
