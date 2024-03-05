@@ -350,12 +350,23 @@ pdflatex &lt;span class=&quot;token function&quot;&gt;diff&lt;/span&gt;&lt;/code
 &lt;p&gt;First, you need to check your &lt;code&gt;acmart.cls&lt;/code&gt; version (you can find it from the first 50 lines of this file).&lt;/p&gt;
 &lt;h2 id=&quot;version-v1-87&quot; tabindex=&quot;-1&quot;&gt;version &amp;gt;= v1.87 &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-cc-block.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;The newer acmart style comes with CC support! However, it only works if you are using &lt;code&gt;noacm&lt;/code&gt; option. You can bypass the constraint by modifying the &lt;code&gt;acmart.cls&lt;/code&gt; file.&lt;/p&gt;
-&lt;p&gt;Comment out the following code in &lt;code&gt;acmart.cls&lt;/code&gt; (line 1937 in v1.87):&lt;/p&gt;
-&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;% &#92;ClassError{&#92;@classname}{%&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%   Sorry, Creative Commons licenses are&#92;MessageBreak&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%   currently not used with ACM publications&#92;MessageBreak&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%   typeset by the authors}{Please use nonacm&lt;/span&gt;
-&lt;span class=&quot;token comment&quot;&gt;%      option or ACM Engage class to enable CC licenses}%&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Comment out the following code in &lt;code&gt;acmart.cls&lt;/code&gt; (line 1937 in v1.87). It prevents acmart from raising an error when you use CC with non-&lt;code&gt;noacm&lt;/code&gt; options.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;def&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ACM@copyright@check@cc&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;if&lt;/span&gt;@ACM@nonacm
+     &lt;span class=&quot;token function selector&quot;&gt;&#92;ClassInfo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;classname&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Using CC license with a non-acm
+       material&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;else&lt;/span&gt;
+     &lt;span class=&quot;token function selector&quot;&gt;&#92;if&lt;/span&gt;@ACM@engage
+        &lt;span class=&quot;token function selector&quot;&gt;&#92;ClassInfo&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;classname&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;Using CC license with ACM Enage
+          material&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+      &lt;span class=&quot;token function selector&quot;&gt;&#92;else&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;% &#92;ClassError{&#92;@classname}{%&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;%   Sorry, Creative Commons licenses are&#92;MessageBreak&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;%   currently not used with ACM publications&#92;MessageBreak&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;%   typeset by the authors}{Please use nonacm&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;%      option or ACM Engage class to enable CC licenses}%&lt;/span&gt;
+      &lt;span class=&quot;token function selector&quot;&gt;&#92;fi&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;fi&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Then, you can use the &lt;code&gt;cc&lt;/code&gt; copyright by adding the following code in your source &lt;code&gt;.tex&lt;/code&gt; file:&lt;/p&gt;
 &lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;setcopyright&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;cc&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;token function selector&quot;&gt;&#92;setcctype&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;4.0&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;by&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;

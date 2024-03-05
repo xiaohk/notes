@@ -153,12 +153,23 @@ pre[class*="language-diff-"] {
 <p>First, you need to check your <code>acmart.cls</code> version (you can find it from the first 50 lines of this file).</p>
 <h2 id="version-v1-87" tabindex="-1">version &gt;= v1.87 <a class="header-anchor" href="#version-v1-87">#</a></h2>
 <p>The newer acmart style comes with CC support! However, it only works if you are using <code>noacm</code> option. You can bypass the constraint by modifying the <code>acmart.cls</code> file.</p>
-<p>Comment out the following code in <code>acmart.cls</code> (line 1937 in v1.87):</p>
-<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token comment">% \ClassError{\@classname}{%</span>
-<span class="token comment">%   Sorry, Creative Commons licenses are\MessageBreak</span>
-<span class="token comment">%   currently not used with ACM publications\MessageBreak</span>
-<span class="token comment">%   typeset by the authors}{Please use nonacm</span>
-<span class="token comment">%      option or ACM Engage class to enable CC licenses}%</span></code></pre>
+<p>Comment out the following code in <code>acmart.cls</code> (line 1937 in v1.87). It prevents acmart from raising an error when you use CC with non-<code>noacm</code> options.</p>
+<pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\def</span><span class="token function selector">\@</span>ACM@copyright@check@cc<span class="token punctuation">{</span><span class="token comment">%</span>
+  <span class="token function selector">\if</span>@ACM@nonacm
+     <span class="token function selector">\ClassInfo</span><span class="token punctuation">{</span><span class="token function selector">\@</span>classname<span class="token punctuation">}</span><span class="token punctuation">{</span>Using CC license with a non-acm
+       material<span class="token punctuation">}</span><span class="token comment">%</span>
+  <span class="token function selector">\else</span>
+     <span class="token function selector">\if</span>@ACM@engage
+        <span class="token function selector">\ClassInfo</span><span class="token punctuation">{</span><span class="token function selector">\@</span>classname<span class="token punctuation">}</span><span class="token punctuation">{</span>Using CC license with ACM Enage
+          material<span class="token punctuation">}</span><span class="token comment">%</span>
+      <span class="token function selector">\else</span>
+      <span class="token comment">% \ClassError{\@classname}{%</span>
+      <span class="token comment">%   Sorry, Creative Commons licenses are\MessageBreak</span>
+      <span class="token comment">%   currently not used with ACM publications\MessageBreak</span>
+      <span class="token comment">%   typeset by the authors}{Please use nonacm</span>
+      <span class="token comment">%      option or ACM Engage class to enable CC licenses}%</span>
+      <span class="token function selector">\fi</span>
+  <span class="token function selector">\fi</span><span class="token punctuation">}</span></code></pre>
 <p>Then, you can use the <code>cc</code> copyright by adding the following code in your source <code>.tex</code> file:</p>
 <pre class="language-latex" tabindex="0"><code class="language-latex"><span class="token function selector">\setcopyright</span><span class="token punctuation">{</span>cc<span class="token punctuation">}</span>
 <span class="token function selector">\setcctype</span><span class="token punctuation">[</span>4.0<span class="token punctuation">]</span><span class="token punctuation">{</span>by<span class="token punctuation">}</span></code></pre>
