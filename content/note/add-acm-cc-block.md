@@ -22,14 +22,25 @@ First, you need to check your `acmart.cls` version (you can find it from the fir
 
 The newer acmart style comes with CC support! However, it only works if you are using `noacm` option. You can bypass the constraint by modifying the `acmart.cls` file.
 
-Comment out the following code in `acmart.cls` (line 1937 in v1.87):
+Comment out the following code in `acmart.cls` (line 1937 in v1.87). It prevents acmart from raising an error when you use CC with non-`noacm` options.
 
 ```latex
-% \ClassError{\@classname}{%
-%   Sorry, Creative Commons licenses are\MessageBreak
-%   currently not used with ACM publications\MessageBreak
-%   typeset by the authors}{Please use nonacm
-%      option or ACM Engage class to enable CC licenses}%
+\def\@ACM@copyright@check@cc{%
+  \if@ACM@nonacm
+     \ClassInfo{\@classname}{Using CC license with a non-acm
+       material}%
+  \else
+     \if@ACM@engage
+        \ClassInfo{\@classname}{Using CC license with ACM Enage
+          material}%
+      \else
+      % \ClassError{\@classname}{%
+      %   Sorry, Creative Commons licenses are\MessageBreak
+      %   currently not used with ACM publications\MessageBreak
+      %   typeset by the authors}{Please use nonacm
+      %      option or ACM Engage class to enable CC licenses}%
+      \fi
+  \fi}
 ```
 
 Then, you can use the `cc` copyright by adding the following code in your source `.tex` file:
