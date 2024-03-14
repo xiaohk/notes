@@ -1,6 +1,6 @@
 ---
 title: How to add a teaser figure using ACL templates?
-description: Hacks to add a teaser figure on the first page using ACL's LaTeX template
+description: Hacks to add a teaser figure on the first page using ACL LaTeX template
 date: 2024-03-14
 tags:
   - latex
