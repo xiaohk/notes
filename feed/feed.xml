@@ -4,12 +4,70 @@
 	<subtitle>Notes about research, technology, and AI.</subtitle>
 	<link href="https://notes.zijie.wang/feed/feed.xml" rel="self"/>
 	<link href="https://notes.zijie.wang/"/>
-	<updated>2023-12-11T00:00:00Z</updated>
+	<updated>2024-03-14T00:00:00Z</updated>
 	<id>https://notes.zijie.wang/</id>
 	<author>
 		<name>Jay Wang</name>
 		<email>jay@zijie.wang</email>
 	</author>
+	
+	<entry>
+		<title>How to add a teaser figure using ACL templates?</title>
+		<link href="https://notes.zijie.wang/acl-template-teaser.html"/>
+		<updated>2024-03-14T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/acl-template-teaser.html</id>
+		<content type="html">&lt;h1 id=&quot;how-to-add-a-teaser-figure-using-acl-templates&quot; tabindex=&quot;-1&quot;&gt;How to add a teaser figure using ACL templates? &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/acl-template-teaser.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;It is quite common to include a teaser figure in ACM and IEEE conference papers.
+This figure typically appears after the author information and before the abstract (see this &lt;a href=&quot;https://arxiv.org/abs/2402.15350&quot;&gt;CHI paper&lt;/a&gt; for an example).&lt;/p&gt;
+&lt;p&gt;However, it is not trivial to add a teaser figure using the &lt;a href=&quot;https://github.com/acl-org/acl-style-files/&quot;&gt;*ACL LaTeX templates&lt;/a&gt; (for ACL, EMNLP, NAACL, EACL, etc.). To do that, we will use a workaround.
+&lt;img width=&quot;100%&quot; src=&quot;https://github.com/poloclub/wordflow/assets/15007159/15925a40-f443-41ad-a65f-c49613556d84&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;if-your-template-is-after-2024&quot; tabindex=&quot;-1&quot;&gt;If your template is after 2024 &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/acl-template-teaser.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If you are using an &lt;code&gt;acl.sty&lt;/code&gt; template file distributed after 2024, add the below code in your &lt;code&gt;.tex&lt;/code&gt; file before the &lt;code&gt;&#92;begin{document}&lt;/code&gt; command.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatletter&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;AtBeginDocument&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;let&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;oldmaketitle&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;maketitle
+&lt;span class=&quot;token function selector&quot;&gt;&#92;renewcommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;maketitle&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;oldmaketitle
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-27pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;includegraphics&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;width=&lt;span class=&quot;token function selector&quot;&gt;&#92;linewidth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;./figures/teaser.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-18pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;captionof&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figure&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;tool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; empowers machine learning researchers and domain experts to easily explore and interpret &lt;span class=&quot;token function selector&quot;&gt;&#92;textit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;millions&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; of embedding vectors across different levels of granularity.
+    Consider the task of investigating the embeddings of all 63k natural language processing paper abstracts indexed in ACL Anthology from 1980 to 2022.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(A) The Map View&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; tightly integrates a contour layer, a scatter plot, and automatically-generated multi-resolution embedding summaries to help users navigate through the large embedding space.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(B) The Search Panel&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; enables users to rapidly test their hypotheses through fast full-text embedding search.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(C) The Control Panel&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; allows users to customize embedding visualizations, compare multiple embedding groups, and observe how embeddings evolve over time.
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;fig:teaser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;17pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatother&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;if-your-template-is-before-2024&quot; tabindex=&quot;-1&quot;&gt;If your template is before 2024 &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/acl-template-teaser.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;If you are using an &lt;code&gt;acl.sty&lt;/code&gt; template file distributed before 2024, add the below code in your &lt;code&gt;.tex&lt;/code&gt; file before the &lt;code&gt;&#92;begin{document}&lt;/code&gt; command.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatletter&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;let&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;oldmaketitle&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;maketitle
+&lt;span class=&quot;token function selector&quot;&gt;&#92;renewcommand&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;maketitle&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;oldmaketitle
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-27pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;includegraphics&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;width=&lt;span class=&quot;token function selector&quot;&gt;&#92;linewidth&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;./figures/teaser.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-18pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;captionof&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figure&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;tool&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; empowers machine learning researchers and domain experts to easily explore and interpret &lt;span class=&quot;token function selector&quot;&gt;&#92;textit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;millions&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; of embedding vectors across different levels of granularity.
+    Consider the task of investigating the embeddings of all 63k natural language processing paper abstracts indexed in ACL Anthology from 1980 to 2022.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(A) The Map View&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; tightly integrates a contour layer, a scatter plot, and automatically-generated multi-resolution embedding summaries to help users navigate through the large embedding space.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(B) The Search Panel&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; enables users to rapidly test their hypotheses through fast full-text embedding search.
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;textbf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;(C) The Control Panel&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; allows users to customize embedding visualizations, compare multiple embedding groups, and observe how embeddings evolve over time.
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;label&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;fig:teaser&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;vspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;17pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+ &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;makeatother&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;final-result&quot; tabindex=&quot;-1&quot;&gt;Final Result &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/acl-template-teaser.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;After the above step, you should see a teaser figure displayed on the first page! For an example, see this &lt;a href=&quot;https://aclanthology.org/2023.acl-demo.50/&quot;&gt;ACL 2023 paper&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img width=&quot;100%&quot; src=&quot;https://github.com/poloclub/wordflow/assets/15007159/c18c4235-daf9-4d6e-8aa0-c5f04afc5f3a&quot;&gt;&lt;/p&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>How to Correctly Count Words in LaTeX?</title>
