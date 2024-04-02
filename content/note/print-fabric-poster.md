@@ -8,8 +8,6 @@ tags:
   - research
 ---
 
-{% raw %}
-
 # Print Academic Posters on Foldable Fabric
 
 I've been printing and presenting fabric academic posters with [Spoonflower](https://www.spoonflower.com) for a few years, and I really like it!
@@ -19,7 +17,9 @@ For example, I have used one poster for more than three events. 😄
 
 Below is a picture of the [WebSHAP](https://poloclub.github.io/webshap) poster first presented at [The Web Conference 2023](https://archives.iw3c2.org/www2023/). This note shows the simple steps to print these posters from [Spoonflower](https://www.spoonflower.com).
 
-<img src="https://github.com/xiaohk/notes/assets/15007159/b2bf0e58-cafa-4650-9cf1-190825e14857" width="100%">
+<p align="center" width="100%">
+<img src="https://github.com/xiaohk/notes/assets/15007159/c7c6dc67-57ff-4aaa-8098-6a9336767e3c" width="500px">
+</p>
 
 ## Step 1: Export Your Poster to a JPEG
 
@@ -81,5 +81,3 @@ Here are more photos of fabric posters printed from Spoonflower. Really apprecia
     <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/stickyland/assets/15007159/9b75aafd-decb-4bc4-a147-750d691c6afa" width="433px"><a href="https://arxiv.org/abs/2110.14060">Argo Scholar</a></td>
   <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/notes/assets/15007159/8969c5d8-9299-460c-b56a-d71de402269d" width="433px"><a href="https://poloclub.github.io/webshap">WebSHAP</a></td>
 </table>
-
-{% endraw %}
