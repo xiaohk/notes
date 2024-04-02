@@ -4,12 +4,85 @@
 	<subtitle>Notes about research, technology, and AI.</subtitle>
 	<link href="https://notes.zijie.wang/feed/feed.xml" rel="self"/>
 	<link href="https://notes.zijie.wang/"/>
-	<updated>2024-03-14T00:00:00Z</updated>
+	<updated>2024-04-01T00:00:00Z</updated>
 	<id>https://notes.zijie.wang/</id>
 	<author>
 		<name>Jay Wang</name>
 		<email>jay@zijie.wang</email>
 	</author>
+	
+	<entry>
+		<title>Print Academic Posters on Foldable Fabric</title>
+		<link href="https://notes.zijie.wang/print-fabric-poster.html"/>
+		<updated>2024-04-01T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/print-fabric-poster.html</id>
+		<content type="html">&lt;h1 id=&quot;print-academic-posters-on-foldable-fabric&quot; tabindex=&quot;-1&quot;&gt;Print Academic Posters on Foldable Fabric &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;I&#39;ve been printing and presenting fabric academic posters with &lt;a href=&quot;https://www.spoonflower.com&quot;&gt;Spoonflower&lt;/a&gt; for a few years, and I really like it!
+These fabrics are foldable, making it easy to travel with them (simply throw them in my backpack) without the hassle of carrying a poster tube.
+The quality of the fabric is excellent, with high resolution and reusability.
+For example, I have used one poster for more than three events. 😄&lt;/p&gt;
+&lt;p&gt;Below is a picture of the &lt;a href=&quot;https://arxiv.org/abs/2303.09545&quot;&gt;WebSHAP&lt;/a&gt; poster first presented at the Web Conference 2023. This note shows the simple steps to print these posters from &lt;a href=&quot;https://www.spoonflower.com&quot;&gt;Spoonflower&lt;/a&gt;.&lt;/p&gt;
+&lt;img src=&quot;https://github.com/xiaohk/notes/assets/15007159/b2bf0e58-cafa-4650-9cf1-190825e14857&quot; width=&quot;100%&quot;&gt;
+&lt;h2 id=&quot;step-1-export-your-poster-to-a-jpeg&quot; tabindex=&quot;-1&quot;&gt;Step 1: Export Your Poster to a JPEG &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Export your poster from your design software (e.g., PowerPoint, Affinity Designer) to a single JPEG file.&lt;/li&gt;
+&lt;li&gt;Refer to &lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/204266984-Tutorial-Creating-a-Fabric-Presentation-Poster-from-a-PDF#adobe&quot;&gt;this guide&lt;/a&gt; for instructions on exporting JPEG from PowerPoint, Google Slides, and Photoshop.&lt;/li&gt;
+&lt;li&gt;Export the JPEG with 150 DPI (dots per inch).
+&lt;ol&gt;
+&lt;li&gt;I always print my poster using A0 size (vertical or horizontal), which has a size of 33.1 x 46.8 inches. Therefore, I just set the poster to be 4965 x 7020 pixels in the design software ($33.1 &#92;times 150 = 4965$).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Export your poster with the s-RGB color profile. It is usually the default option.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;best-practices&quot; tabindex=&quot;-1&quot;&gt;Best practices &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Use high-contrast colors in your poster, especially when using dark colors on top of each other (e.g., gray on black).&lt;/li&gt;
+&lt;li&gt;Be careful with highly saturated dark colors (e.g., dark bright blue), as they may appear differently on the fabric.&lt;/li&gt;
+&lt;li&gt;If you use a light background in the poster, make sure it is true white (#FFFFFF) or totally transparent. Spoonflower will exclude these areas instead of printing them with white ink.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;more-resources&quot; tabindex=&quot;-1&quot;&gt;More resources &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/204444620-How-Can-I-Make-Sure-My-Design-is-the-Color-I-Want&quot;&gt;How Can I Make Sure My Design is the Color I Want?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.spoonflower.com/2019/02/15/5-tips-for-designing-on-spoonflower/&quot;&gt;Designing on Spoonflower? Don’t Miss These 5 Tips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/204277834-Learn-about-Image-Resolution-and-DPI#resolution&quot;&gt;Learn about Image Resolution and DPI&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/204756494-Saving-Image-Files-as-sRGB&quot;&gt;Saving Image Files as sRGB&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/9327411118349-150-DPI-The-Best-Resolution-for-Spoonflower&quot;&gt;150 DPI: The Best Resolution for Spoonflower&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://support.spoonflower.com/hc/en-us/articles/204266984-Tutorial-Creating-a-Fabric-Presentation-Poster-from-a-PDF#adobe&quot;&gt;Tutorial: Creating a Fabric Presentation Poster from a PDF&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;step-2-upload-the-jpeg-to-spoonflower&quot; tabindex=&quot;-1&quot;&gt;Step 2: Upload the JPEG to Spoonflower &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;You can upload your poster JEPG to Spoonflower with [My profile] → [Design library] → [Add Design].&lt;/p&gt;
+&lt;p&gt;Then, you can configure your poster using the settings below.&lt;/p&gt;
+&lt;img width=&quot;100%&quot; alt=&quot;Monosnap poster-a0 - xiaohk - Spoonflower 2024-04-01 21-39-15&quot; src=&quot;https://github.com/xiaohk/notes/assets/15007159/c4a17e8b-3693-4156-b356-f84ec4e8f8f4&quot;&gt;
+&lt;ol&gt;
+&lt;li&gt;If your poster is vertical, rotate it left/right 90° before uploading&lt;/li&gt;
+&lt;li&gt;Choose &lt;strong&gt;Center&lt;/strong&gt; for Repeat&lt;/li&gt;
+&lt;li&gt;Choose &lt;strong&gt;Performance Piqué&lt;/strong&gt; for Fabric&lt;/li&gt;
+&lt;li&gt;Keep the 1 Yard option in Choose a Size &amp;amp; Amount&lt;/li&gt;
+&lt;li&gt;Make sure you can see your whole poster in the left preview. Your printed poster will look exactly like this including the white paddings.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;more-resources-1&quot; tabindex=&quot;-1&quot;&gt;More resources &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://blog.spoonflower.com/2018/07/24/how-to-design-a-fabric-research-poster-with-powerpoint/&quot;&gt;How To Design a Fabric Research Poster with PowerPoint&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;step-3-present-your-poster&quot; tabindex=&quot;-1&quot;&gt;Step 3: Present Your Poster &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;To travel with your poster, simply fold it and put it in your backpack. There will be almost no creases after unfolding.&lt;/li&gt;
+&lt;li&gt;If your poster is A0 size, there will be white padding around it. You can use a scissor to cut it out (see the &lt;a href=&quot;https://arxiv.org/abs/2303.09545&quot;&gt;WebSHAP&lt;/a&gt; poster) or use clips to fold it backward (see the &lt;a href=&quot;https://arxiv.org/abs/2205.03963&quot;&gt;NOVA&lt;/a&gt; poster). I recommend directly cutting it out directly.&lt;/li&gt;
+&lt;li&gt;Use plenty of pins to hang your poster to prevent it from becoming saggy (especially for horizontal posters).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;final-result&quot; tabindex=&quot;-1&quot;&gt;Final Result &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/print-fabric-poster.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Here are more pictures of fabric posters printed with Spoonflower. Appreciate &lt;a href=&quot;https://twitter.com/tamaramunzner/status/1583899828027035648?s=61&amp;amp;t=F4ezGDTP-rVjPvu__f_gfw&quot;&gt;Tamara Munzner&lt;/a&gt; for the pictures!!&lt;/p&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td&gt;&lt;img src=&quot;https://github.com/xiaohk/stickyland/assets/15007159/7657cd7e-3b88-4776-83eb-f9f35f34b043&quot; width=&quot;433px&quot;&gt;&lt;/td&gt;
+    &lt;td&gt;&lt;img src=&quot;https://github.com/xiaohk/stickyland/assets/15007159/13e14a69-34a4-4b7e-96cb-fb396588d921&quot; width=&quot;433px&quot;&gt;&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;&lt;/tr&gt;
+    &lt;td&gt;&lt;img src=&quot;https://github.com/xiaohk/stickyland/assets/15007159/9b75aafd-decb-4bc4-a147-750d691c6afa&quot; width=&quot;433px&quot;&gt;&lt;/td&gt;
+  &lt;td&gt;&lt;img src=&quot;https://github.com/xiaohk/notes/assets/15007159/8969c5d8-9299-460c-b56a-d71de402269d&quot; width=&quot;433px&quot;&gt;&lt;/td&gt;
+&lt;/table&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>How to Add a Teaser Figure Using ACL Templates?</title>
