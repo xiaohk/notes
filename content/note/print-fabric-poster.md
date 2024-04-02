@@ -17,7 +17,7 @@ These fabrics are foldable, making it easy to travel with them (simply throw the
 The quality of the fabric is excellent, with high resolution and reusability.
 For example, I have used one poster for more than three events. 😄
 
-Below is a picture of the [WebSHAP](https://poloclub.github.io/webshap) poster first presented at the Web Conference 2023. This note shows the simple steps to print these posters from [Spoonflower](https://www.spoonflower.com).
+Below is a picture of the [WebSHAP](https://poloclub.github.io/webshap) poster first presented at [The Web Conference 2023](https://archives.iw3c2.org/www2023/). This note shows the simple steps to print these posters from [Spoonflower](https://www.spoonflower.com).
 
 <img src="https://github.com/xiaohk/notes/assets/15007159/b2bf0e58-cafa-4650-9cf1-190825e14857" width="100%">
 
