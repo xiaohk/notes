@@ -17,7 +17,7 @@ These fabrics are foldable, making it easy to travel with them (simply throw the
 The quality of the fabric is excellent, with high resolution and reusability.
 For example, I have used one poster for more than three events. 😄
 
-Below is a picture of the [WebSHAP](https://arxiv.org/abs/2303.09545) poster first presented at the Web Conference 2023. This note shows the simple steps to print these posters from [Spoonflower](https://www.spoonflower.com).
+Below is a picture of the [WebSHAP](https://poloclub.github.io/webshap) poster first presented at the Web Conference 2023. This note shows the simple steps to print these posters from [Spoonflower](https://www.spoonflower.com).
 
 <img src="https://github.com/xiaohk/notes/assets/15007159/b2bf0e58-cafa-4650-9cf1-190825e14857" width="100%">
 
@@ -65,7 +65,7 @@ Then, you can configure your poster using the settings below.
 ## Step 3: Present Your Poster
 
 1. To travel with your poster, simply fold it and put it in your backpack. There will be almost no creases after unfolding.
-2. If your poster is A0 size, there will be white padding around it. You can use a scissor to cut it out (see the [WebSHAP](https://arxiv.org/abs/2303.09545) poster) or use clips to fold it backward (see the [NOVA](https://arxiv.org/abs/2205.03963) poster). I recommend directly cutting it out directly.
+2. If your poster is A0 size, there will be white padding around it. You can use a scissor to cut it out (see the [WebSHAP](https://arxiv.org/abs/2303.09545) poster) or use clips to fold it backward (see the [NOVA](https://github.com/poloclub/nova) poster). I recommend directly cutting it out directly.
 3. Use plenty of pins to hang your poster to prevent it from becoming saggy (especially for horizontal posters).
 
 ## Final Result
@@ -74,12 +74,12 @@ Here are more pictures of fabric posters printed with Spoonflower. Appreciate [T
 
 <table>
   <tr>
-    <td><img src="https://github.com/xiaohk/stickyland/assets/15007159/7657cd7e-3b88-4776-83eb-f9f35f34b043" width="433px"></a></td>
-    <td><img src="https://github.com/xiaohk/stickyland/assets/15007159/13e14a69-34a4-4b7e-96cb-fb396588d921" width="433px"></a></td>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/stickyland/assets/15007159/7657cd7e-3b88-4776-83eb-f9f35f34b043" width="433px"></a><a href="https://github.com/poloclub/nova">NOVA</a></td>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/stickyland/assets/15007159/13e14a69-34a4-4b7e-96cb-fb396588d921" width="433px"></a><a href="https://arxiv.org/abs/2210.12492">NeuroMapper</a></td>
   </tr>
   <tr></tr>
-    <td><img src="https://github.com/xiaohk/stickyland/assets/15007159/9b75aafd-decb-4bc4-a147-750d691c6afa" width="433px"></td>
-  <td><img src="https://github.com/xiaohk/notes/assets/15007159/8969c5d8-9299-460c-b56a-d71de402269d" width="433px"></td>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/stickyland/assets/15007159/9b75aafd-decb-4bc4-a147-750d691c6afa" width="433px"><a href="https://arxiv.org/abs/2110.14060">Argo Scholar</a></td>
+  <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/notes/assets/15007159/8969c5d8-9299-460c-b56a-d71de402269d" width="433px"><a href="https://poloclub.github.io/webshap">WebSHAP</a></td>
 </table>
 
 {% endraw %}
