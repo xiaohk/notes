@@ -70,7 +70,7 @@ Then, you can configure your poster using the settings below.
 
 ## Final Result
 
-Here are more pictures of fabric posters printed with Spoonflower. Appreciate [Tamara Munzner](https://twitter.com/tamaramunzner/status/1583899828027035648?s=61&t=F4ezGDTP-rVjPvu__f_gfw) for the pictures!!
+Here are more photos of fabric posters printed from Spoonflower. Really appreciate [Tamara Munzner](https://twitter.com/tamaramunzner/status/1583899828027035648?s=61&t=F4ezGDTP-rVjPvu__f_gfw) for the pictures!!
 
 <table>
   <tr>
