@@ -72,17 +72,17 @@
 	</url>
 	
 	<url>
-		<loc>https://notes.zijie.wang/tags/chi/</loc>
-		<lastmod>2024-04-02</lastmod>
-	</url>
-	
-	<url>
 		<loc>https://notes.zijie.wang/tags/poster/</loc>
 		<lastmod>2024-04-02</lastmod>
 	</url>
 	
 	<url>
 		<loc>https://notes.zijie.wang/tags/presentation/</loc>
+		<lastmod>2024-04-02</lastmod>
+	</url>
+	
+	<url>
+		<loc>https://notes.zijie.wang/tags/chi/</loc>
 		<lastmod>2024-04-02</lastmod>
 	</url>
 </urlset>
