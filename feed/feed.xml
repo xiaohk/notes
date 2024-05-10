@@ -4,12 +4,83 @@
 	<subtitle>Notes about research, technology, and AI.</subtitle>
 	<link href="https://notes.zijie.wang/feed/feed.xml" rel="self"/>
 	<link href="https://notes.zijie.wang/"/>
-	<updated>2024-04-01T00:00:00Z</updated>
+	<updated>2024-05-10T00:00:00Z</updated>
 	<id>https://notes.zijie.wang/</id>
 	<author>
 		<name>Jay Wang</name>
 		<email>jay@zijie.wang</email>
 	</author>
+	
+	<entry>
+		<title>Add ACM Badges to ACM Preprints</title>
+		<link href="https://notes.zijie.wang/add-acm-badge.html"/>
+		<updated>2024-05-10T00:00:00Z</updated>
+		<id>https://notes.zijie.wang/add-acm-badge.html</id>
+		<content type="html">&lt;h1 id=&quot;add-acm-badges-to-acm-preprints&quot; tabindex=&quot;-1&quot;&gt;Add ACM Badges to ACM Preprints &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-badge.html&quot;&gt;#&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;ACM conferences have begun to award &lt;a href=&quot;https://www.acm.org/publications/policies/artifact-review-and-badging-current&quot;&gt;artifact badges&lt;/a&gt; for publications containing artifacts like software and datasets. These badges, such as &amp;quot;Artifact Available&amp;quot; and &amp;quot;Artifact Functional,&amp;quot; are granted based on the conference&#39;s artifact review procedures.&lt;/p&gt;
+&lt;p&gt;Typically, authors receive these badges on their camera-ready papers after submission, with the badges appearing on the top right of the paper PDFs in the conference proceedings.&lt;/p&gt;
+&lt;p&gt;However, many authors also wish to include these badges in their preprint PDFs, such as those distributed on arXiv. In this note, we will explore how to add these badges to our own PDFs using the ACM&#39;s LaTeX template.&lt;/p&gt;
+&lt;img src=&quot;https://i.imgur.com/9QwLUoc.png&quot; width=&quot;100%&quot;&gt;
+&lt;h2 id=&quot;step-1-download-badge-figures&quot; tabindex=&quot;-1&quot;&gt;Step 1: Download Badge Figures &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-badge.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Download the icons (PDF format) for the badges granted to your paper. Save these icons to your paper&#39;s LaTeX source directory.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Artifact Available&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Artifact Functional&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Artifact Reusable&lt;/th&gt;
+&lt;th style=&quot;text-align:center&quot;&gt;Results Reproduced&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://notes.zijie.wang/img/webp/artifacts-available-v1.1.webp&quot;&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://notes.zijie.wang/img/webp/artifacts-functional-v1.1.webp&quot;&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://notes.zijie.wang/img/webp/artifacts-reusable-v1.1.webp&quot;&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;img src=&quot;https://notes.zijie.wang/img/webp/results-reproduced-v1.1.webp&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://notes.zijie.wang/img/pdf/artifacts-available-v1.1.pdf&quot;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://notes.zijie.wang/img/pdf/artifacts-functional-v1.1.pdf&quot;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://notes.zijie.wang/img/pdf/artifacts-reusable-v1.1.pdf&quot;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;td style=&quot;text-align:center&quot;&gt;&lt;a href=&quot;https://notes.zijie.wang/img/pdf/results-reproduced-v1.1.pdf&quot;&gt;Download&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;step-2-enable-badges-in-latex&quot; tabindex=&quot;-1&quot;&gt;Step 2: Enable Badges in LaTeX &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-badge.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Add the following code to your LaTeX file (before &lt;code&gt;&#92;begin{document}&lt;/code&gt;). You might want to modify the path to the downloaded badge files (&lt;code&gt;figures/artifacts-available-v1.1.pdf&lt;/code&gt;).&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;acmBadgeR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;https://www.acm.org/publications/policies/artifact-review-and-badging-current&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figures/artifacts-available-v1.1.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, the badge should show up in the compiled PDF!&lt;/p&gt;
+&lt;img src=&quot;https://i.imgur.com/CjjmJd6.png&quot; width=&quot;100%&quot;&gt;
+&lt;p&gt;If your paper has multiple badges, you can add have multiple &lt;code&gt;&#92;acmBadgeR&lt;/code&gt; calls.&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;acmBadgeR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;https://www.acm.org/publications/policies/artifact-review-and-badging-current&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figures/artifacts-available-v1.1.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;acmBadgeR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;https://www.acm.org/publications/policies/artifact-review-and-badging-current&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;figures/artifacts-functional-v1.1.pdf&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;img src=&quot;https://i.imgur.com/sZ6lGSD.png&quot; width=&quot;100%&quot;&gt;
+&lt;h2 id=&quot;step-3-bonus-style-the-badges&quot; tabindex=&quot;-1&quot;&gt;Step 3 (Bonus): Style the Badges &lt;a class=&quot;header-anchor&quot; href=&quot;https://notes.zijie.wang/add-acm-badge.html&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;By default, the badges in our own PDFs are smaller than the ones in ACM proceedings. If we want our PDFs to look the same as the proceedings, we need to modify the ACM style file (&lt;code&gt;acmart.cls&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Search &lt;code&gt;&#92;setlength&#92;@ACM@badge@width&lt;/code&gt; in the file, and change it as the following:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;% [OLD] &#92;setlength&#92;@ACM@badge@width{3pc}&lt;/span&gt;
+&lt;span class=&quot;token function selector&quot;&gt;&#92;setlength&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ACM@badge@width&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;65pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Also change the &lt;code&gt;raisebox{}&lt;/code&gt; in the definition of the command &lt;code&gt;acmBadgeR&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class=&quot;language-latex&quot; tabindex=&quot;0&quot;&gt;&lt;code class=&quot;language-latex&quot;&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;newcommand&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;acmBadgeR&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;2&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;ifx&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;acmBadgeR&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;empty
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;gdef&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;acmBadgeR&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+      &lt;span class=&quot;token function selector&quot;&gt;&#92;smash&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;% [OLD] &#92;raisebox{0.5&#92;height}{%&lt;/span&gt;
+        &lt;span class=&quot;token function selector&quot;&gt;&#92;raisebox&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-10pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+          &lt;span class=&quot;token function selector&quot;&gt;&#92;href&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;includegraphics&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;width=&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ACM@badge@width&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;else&lt;/span&gt;
+    &lt;span class=&quot;token function selector&quot;&gt;&#92;g&lt;/span&gt;@addto@macro&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;acmBadgeR&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+      &lt;span class=&quot;token function selector&quot;&gt;&#92;hspace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ACM@badge@skip&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+      &lt;span class=&quot;token function selector&quot;&gt;&#92;smash&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;% [OLD] &#92;raisebox{0.5&#92;height}{%&lt;/span&gt;
+        &lt;span class=&quot;token function selector&quot;&gt;&#92;raisebox&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;-10pt&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+          &lt;span class=&quot;token function selector&quot;&gt;&#92;href&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#1&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token function selector&quot;&gt;&#92;includegraphics&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;width=&lt;span class=&quot;token function selector&quot;&gt;&#92;@&lt;/span&gt;ACM@badge@width&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;#2&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token comment&quot;&gt;%&lt;/span&gt;
+  &lt;span class=&quot;token function selector&quot;&gt;&#92;fi&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After re-compiling the PDF, the badges should have a similar size to the badges appeared in proceeding PDFs.&lt;/p&gt;
+&lt;img src=&quot;https://i.imgur.com/AkBA0fm.png&quot; width=&quot;100%&quot;&gt;
+</content>
+	</entry>
 	
 	<entry>
 		<title>Print Academic Posters on Foldable Fabric</title>
