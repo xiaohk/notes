@@ -50,9 +50,15 @@ You can upload your poster JEPG to [Spoonflower](https://www.spoonflower.com) by
 
 Then, you can configure your poster using the settings below.
 
-<img width="100%" src="https://i.imgur.com/x723IZe.png">
+<table>
+  <tr>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://i.imgur.com/x723IZe.png" width="100%"></td>
 
-<img width="100%" src="https://i.imgur.com/KIUTkIL.png">
+  </tr>
+  <tr></tr>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://i.imgur.com/KIUTkIL.png" width="100%"></a></td>
+    </tr>
+</table>
 
 1. If your poster is vertical, rotate it left/right 90° **before** uploading
 2. Click `Edit` in the Fabric card under "Edit Scale & Repeat"
@@ -69,7 +75,11 @@ Then, you can configure your poster using the settings below.
 
 Once you have configured the layout of your poster, you can click `Buy` in the Fabric card to order your poster.
 
-<img width="100%" src="https://i.imgur.com/UN5sC2p.png">
+<table>
+  <tr>
+    <td style="text-align: center; vertical-align: middle;"><img src="https://i.imgur.com/UN5sC2p.png" width="100%"></td>
+  </tr>
+</table>
 
 1. Choose **Sport Piqué** for Fabric
 2. Choose **Yard 56'' x 36''** for Size
