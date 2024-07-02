@@ -46,23 +46,36 @@ Below is a picture of the [WebSHAP](https://poloclub.github.io/webshap) poster f
 
 ## Step 2: Upload the JPEG to Spoonflower
 
-You can upload your poster JEPG to Spoonflower with [My profile] → [Design library] → [Add Design].
+You can upload your poster JEPG to [Spoonflower](https://www.spoonflower.com) by selecting `My profile` → `Design library` → `Add Design`.
 
 Then, you can configure your poster using the settings below.
 
-<img width="100%" alt="Monosnap poster-a0 - xiaohk - Spoonflower 2024-04-01 21-39-15" src="https://github.com/xiaohk/notes/assets/15007159/c4a17e8b-3693-4156-b356-f84ec4e8f8f4">
+<img width="100%" src="https://i.imgur.com/x723IZe.png">
 
-1. If your poster is vertical, rotate it left/right 90° before uploading
-2. Choose **Center** for Repeat
-3. Choose **Performance Piqué** for Fabric
-4. Keep the 1 Yard option in Choose a Size & Amount
+<img width="100%" src="https://i.imgur.com/KIUTkIL.png">
+
+1. If your poster is vertical, rotate it left/right 90° **before** uploading
+2. Click `Edit` in the Fabric card under "Edit Scale & Repeat"
+3. Choose **56''** for Preview Fabric
+4. Choose **Center** for Repeat
 5. Make sure you can see your whole poster in the left preview. Your printed poster will look exactly like this including the white paddings.
+6. Save the configuration
 
 ### More resources
 
 1. [How To Design a Fabric Research Poster with PowerPoint](https://blog.spoonflower.com/2018/07/24/how-to-design-a-fabric-research-poster-with-powerpoint/)
 
-## Step 3: Present Your Poster
+## Step 3: Order Your Poster
+
+Once you have configured the layout of your poster, you can click `Buy` in the Fabric card to order your poster.
+
+<img width="100%" src="https://i.imgur.com/UN5sC2p.png">
+
+1. Choose **Sport Piqué** for Fabric
+2. Choose **Yard 56'' x 36''** for Size
+3. Click **Add to Cart** to continue the ordering process
+
+## Step 4: Present Your Poster
 
 1. To travel with your poster, simply fold it and put it in your backpack. There will be almost no creases after unfolding.
 2. If your poster is A0 size, there will be white padding around it. You can use a scissor to cut it out (see the [WebSHAP](https://arxiv.org/abs/2303.09545) poster) or use clips to fold it backward (see the [NOVA](https://github.com/poloclub/nova) poster). I recommend directly cutting it out directly.
@@ -81,3 +94,5 @@ Here are more photos of fabric posters printed from Spoonflower. Really apprecia
     <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/stickyland/assets/15007159/9b75aafd-decb-4bc4-a147-750d691c6afa" width="433px"><a href="https://arxiv.org/abs/2110.14060">Argo Scholar</a></td>
   <td style="text-align: center; vertical-align: middle;"><img src="https://github.com/xiaohk/notes/assets/15007159/8969c5d8-9299-460c-b56a-d71de402269d" width="433px"><a href="https://poloclub.github.io/webshap">WebSHAP</a></td>
 </table>
+
+###### Last updated: 7/2/2024
